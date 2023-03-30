@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="typora-vue-theme主题介绍, 小林嘞">
+    <meta name="keywords" content="Spring面试--IoC/Aop, 小林嘞">
     <meta name="description" content="Spring IoC1.谈谈对SpringIoc的理解1.1 控制反转来源-控制指的是对象创建（实例化，管理的权利）-反转：指的是将控制权交给外部环境（Spring框架，Ioc容器）
 将对象之间的相互依赖关系交给IoC容器来管理，并由容器完">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>typora-vue-theme主题介绍 | 小林嘞</title>
+    <title>Spring面试--IoC/Aop | 小林嘞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -53,7 +53,7 @@
 
     <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
 
-<meta name="generator" content="Hexo 6.3.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
 <body>
@@ -335,12 +335,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">typora-vue-theme主题介绍</h1>
+                    <h1 class="description center-align post-title">Spring面试--IoC/Aop</h1>
                 </div>
             </div>
         </div>
@@ -409,6 +409,9 @@
         <hr class="clearfix">
 
         
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
 
         
 
@@ -436,36 +439,41 @@
 <p>例如：现有三个类，Horse、Pig、Dog，这三个类中都有 eat 和 run 两个方法。</p>
 <p>通过 OOP 思想中的继承，我们可以提取出一个 Animal 的父类，然后将 eat 和 run 方法放入父类中，Horse、Pig、Dog通过继承Animal类即可自动获得 eat() 和 run() 方法。这样将会少些很多重复的代码。</p>
 <p><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230330102109.png" alt="20230330102109"></p>
-<p>OOP的代码如下：<br>‘’<br>public class Animal {</p>
-<pre><code>/** 身高 */
-private String height;
+<p>OOP的代码如下：  </p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Animal</span> <span class="token punctuation">&#123;</span>
 
-/** 体重 */
-private double weight;
+    <span class="token comment">/** 身高 */</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> height<span class="token punctuation">;</span>
 
-public void eat() &#123;
-    // 性能监控代码
-    long start = System.currentTimeMillis();
+    <span class="token comment">/** 体重 */</span>
+    <span class="token keyword">private</span> <span class="token keyword">double</span> weight<span class="token punctuation">;</span>
 
-    // 业务逻辑代码
-    System.out.println(&quot;I can eat...&quot;);
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">eat</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 性能监控代码</span>
+        <span class="token keyword">long</span> start <span class="token operator">=</span> <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // 性能监控代码
-    System.out.println(&quot;执行时长：&quot; + (System.currentTimeMillis() - start)/1000f + &quot;s&quot;);
-&#125;
+        <span class="token comment">// 业务逻辑代码</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"I can eat..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-public void run() &#123;
-    // 性能监控代码
-    long start = System.currentTimeMillis();
+        <span class="token comment">// 性能监控代码</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"执行时长："</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> start<span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">1000f</span> <span class="token operator">+</span> <span class="token string">"s"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
 
-    // 业务逻辑代码
-    System.out.println(&quot;I can run...&quot;);
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">run</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 性能监控代码</span>
+        <span class="token keyword">long</span> start <span class="token operator">=</span> <span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-    // 性能监控代码
-    System.out.println(&quot;执行时长：&quot; + (System.currentTimeMillis() - start)/1000f + &quot;s&quot;);
-&#125;
-</code></pre>
-<p>}<br>‘’</p>
+        <span class="token comment">// 业务逻辑代码</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"I can run..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 性能监控代码</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"执行时长："</span> <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> start<span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">1000f</span> <span class="token operator">+</span> <span class="token string">"s"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230330102246.png" alt="20230330102246"></p>
 <p>横切代码存在的逻辑问题：</p>
 <ul>
@@ -623,17 +631,18 @@ public void run() &#123;
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2023/03/30/test/">
+                <a href="/2023/03/30/spring-mian-shi-bi-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="typora-vue-theme主题介绍">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Spring面试--IoC/Aop">
                         
-                        <span class="card-title">typora-vue-theme主题介绍</span>
+                        <span class="card-title">Spring面试--IoC/Aop</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -643,9 +652,9 @@ public void run() &#123;
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-30
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-30
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -658,6 +667,7 @@ public void run() &#123;
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -677,16 +687,16 @@ public void run() &#123;
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Next&nbsp;<i class="fas fa-chevron-right"></i>
+                Current&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2023/03/29/hello-world/">
+                <a href="/2023/03/30/spring-mian-shi-bi-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Spring面试--IoC/Aop">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">Spring面试--IoC/Aop</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -697,15 +707,32 @@ public void run() &#123;
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-30
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            YCL
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/spring%E9%9D%A2%E8%AF%95/" class="post-category">
+                                    spring面试
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/spring/">
+                        <span class="chip bg-color">spring</span>
+                    </a>
+                    
+                    <a href="/tags/%E9%9D%A2%E8%AF%95/">
+                        <span class="chip bg-color">面试</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -721,6 +748,9 @@ public void run() &#123;
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
 
 <!-- 代码语言 -->
