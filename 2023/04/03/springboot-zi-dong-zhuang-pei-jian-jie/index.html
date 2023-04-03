@@ -4,11 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Trie 前缀树（字典树）, 小林嘞">
-    <meta name="description" content="1. 什么是前缀树？字典树是一种树形结构，典型应用是用于统计，排序和大量字符串的索引工作，比如查询要插入的数据是否已经存在于数据结构之中，查询已有数据中是否有以要插入的字段开头的数据。
-他的图形化表示如下所示：
-图片出处
-从图中我们可以看到">
+    <meta name="keywords" content="Springboot 自动装配简介, 小林嘞">
+    <meta name="description" content="1. 什么是springBoot自动装配？实际上自动装配在Spring Framework中早就实现了这个功能。spring boot只是在这个基础上，通过spi的方式，做了进一步优化。
+
+springBoot自己定义了一套接口规范，在启动">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +19,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Trie 前缀树（字典树） | 小林嘞</title>
+    <title>Springboot 自动装配简介 | 小林嘞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -337,12 +336,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Trie 前缀树（字典树）</h1>
+                    <h1 class="description center-align post-title">Springboot 自动装配简介</h1>
                 </div>
             </div>
         </div>
@@ -366,20 +365,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98/">
-                                <span class="chip bg-color">力扣刷题</span>
+                            <a href="/tags/%E9%9D%A2%E8%AF%95/">
+                                <span class="chip bg-color">面试</span>
                             </a>
                         
-                            <a href="/tags/Trie/">
-                                <span class="chip bg-color">Trie</span>
+                            <a href="/tags/springboot/">
+                                <span class="chip bg-color">springboot</span>
                             </a>
                         
-                            <a href="/tags/%E5%89%8D%E7%BC%80%E6%A0%91/">
-                                <span class="chip bg-color">前缀树</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%AD%97%E5%85%B8%E6%A0%91/">
-                                <span class="chip bg-color">字典树</span>
+                            <a href="/tags/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">
+                                <span class="chip bg-color">自动装配</span>
                             </a>
                         
                     </div>
@@ -390,8 +385,12 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98/" class="post-category">
-                                力扣刷题
+                            <a href="/categories/spring%E9%9D%A2%E8%AF%95/" class="post-category">
+                                spring面试
+                            </a>
+                        
+                            <a href="/categories/spring%E9%9D%A2%E8%AF%95/springBoot%E5%8E%9F%E7%90%86/" class="post-category">
+                                springBoot原理
                             </a>
                         
                     </div>
@@ -403,14 +402,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2023-04-02
+                    2023-04-03
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2023-04-02
+                    2023-04-03
                 </div>
                 
 
@@ -447,145 +446,122 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="1-什么是前缀树？"><a href="#1-什么是前缀树？" class="headerlink" title="1. 什么是前缀树？"></a>1. 什么是前缀树？</h1><p>字典树是一种树形结构，典型应用是用于统计，排序和大量字符串的索引工作，比如查询要插入的数据是否已经存在于数据结构之中，查询已有数据中是否有以要插入的字段开头的数据。</p>
-<p>他的图形化表示如下所示：<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230402182559.png" alt="20230402182559"></p>
-<p><a  href ="https://www.bilibili.com/video/BV1yA4y1Z74t/?spm_id_from=333.337.search-card.all.click&vd_source=ecd5c866d6cf8dc2ca7670889ecca2f4">图片出处</a></p>
-<p>从图中我们可以看到，其实前缀树就是不断地将具有相同前缀的数据结构合并。比如对于car和cat，他们同样的是“ca”，所以在左侧第二颗前缀树中，最后一层有两个分叉。前缀树中，边表示字符，同时每个节点会额外添加一个数组，表示以节点P结尾的单词的插入次数。这里注意，节点的序号没有什么实际的意义。</p>
-<h1 id="2-前缀树定义题"><a href="#2-前缀树定义题" class="headerlink" title="2. 前缀树定义题"></a>2. 前缀树定义题</h1><p>力扣上的前缀树定义题如下：<br><a  href ="https://leetcode.cn/problems/implement-trie-prefix-tree/description/">208. 实现 Trie (前缀树)</a><br>，简单的题目描述如下：</p>
+                <h1 id="1-什么是springBoot自动装配？"><a href="#1-什么是springBoot自动装配？" class="headerlink" title="1. 什么是springBoot自动装配？"></a>1. 什么是springBoot自动装配？</h1><p>实际上自动装配在Spring Framework中早就实现了这个功能。spring boot只是在这个基础上，通过spi的方式，做了进一步优化。</p>
 <blockquote>
-<p>Trie（发音类似 “try”）或者说 前缀树 是一种树形数据结构，用于高效地存储和检索字符串数据集中的键。这一数据结构有相当多的应用情景，例如自动补完和拼写检查。</p>
+<p>springBoot自己定义了一套接口规范，在启动时会去扫描外部引用的jar包中的META-INF&#x2F;spring.factories文件，将文件中的配置信息的类型信息加载到spring容器中，并执行类中定义的各种操作。对于外部jar来说，只需要按照springboot定义的标准，就能将自己的功能装置加载进springboot。</p>
 </blockquote>
-<p>请你实现 Trie 类：</p>
+<p>没有spring boot的情况下，我们需要引入第三方依赖，需要手动配置，但是springboot里，直接引入一个strarter即可。比如想在项目主使用redis，那么引入对应的starter就好了</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-data-redis<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>然后再引入少量的注解和一些简单配置就行了。<br>自动装配可以理解为： <strong>通过注解或者一些简单配置就能在springboot的帮助下，实现某块功能。</strong>  </p>
+<h1 id="2-springBoot是如何实现自动装配的"><a href="#2-springBoot是如何实现自动装配的" class="headerlink" title="2. springBoot是如何实现自动装配的"></a>2. springBoot是如何实现自动装配的</h1><p>核心注解就是@SpringBootApplication，源代码如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token class-name">ElementType</span><span class="token punctuation">.</span><span class="token constant">TYPE</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span><span class="token class-name">RetentionPolicy</span><span class="token punctuation">.</span><span class="token constant">RUNTIME</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Documented</span>
+<span class="token annotation punctuation">@Inherited</span>
+<span class="token generics"><span class="token punctuation">&lt;</span>1<span class="token punctuation">.</span><span class="token punctuation">></span></span><span class="token annotation punctuation">@SpringBootConfiguration</span>
+<span class="token generics"><span class="token punctuation">&lt;</span>2<span class="token punctuation">.</span><span class="token punctuation">></span></span><span class="token annotation punctuation">@ComponentScan</span>
+<span class="token generics"><span class="token punctuation">&lt;</span>3<span class="token punctuation">.</span><span class="token punctuation">></span></span><span class="token annotation punctuation">@EnableAutoConfiguration</span>
+<span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">SpringBootApplication</span> <span class="token punctuation">&#123;</span>
+
+<span class="token punctuation">&#125;</span>
+
+<span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token class-name">ElementType</span><span class="token punctuation">.</span><span class="token constant">TYPE</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span><span class="token class-name">RetentionPolicy</span><span class="token punctuation">.</span><span class="token constant">RUNTIME</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Documented</span>
+<span class="token annotation punctuation">@Configuration</span> <span class="token comment">//实际上它也是一个配置类</span>
+<span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">SpringBootConfiguration</span> <span class="token punctuation">&#123;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看到，@SpringBootApplication可以理解为@SpringBootConfiguration，@ComponentScan，@EnableAutoConfiguration三者的组合。<br>作用如下：  </p>
 <ul>
-<li>Trie() 初始化前缀树对象。</li>
-<li>void insert(String word) 向前缀树中插入字符串 word 。</li>
-<li>boolean search(String word) 如果字符串 word 在前缀树中，返回 true（即，在检索之前已经插入）；否则，返回 false 。</li>
-<li>boolean startsWith(String prefix) 如果之前已经插入的字符串 word 的前缀之一为 prefix ，返回 true ；否则，返回 false 。<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Trie</span> <span class="token punctuation">&#123;</span>
-
-    <span class="token keyword">public</span> <span class="token class-name">Trie</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
-    <span class="token punctuation">&#125;</span>
-    
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">insert</span><span class="token punctuation">(</span><span class="token class-name">String</span> word<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
-    <span class="token punctuation">&#125;</span>
-    
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">search</span><span class="token punctuation">(</span><span class="token class-name">String</span> word<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
-    <span class="token punctuation">&#125;</span>
-    
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token class-name">String</span> prefix<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li>@EnableAutoConfiguration：开启自动装配</li>
+<li>@Configuration: 允许上下文中注册额外的bean或导入其他配置类。</li>
+<li>@ComponentScan： 扫描被@Component修饰的bean，默认会扫描启动类所在的包下的所有类，可以自定义不扫描的某些bean，使用 @ComponentScan（excludeFilters &#x3D; {@Filter(type &#x3D; FilterType.CUSTOM, classes &#x3D; TypeExcluderFilter.class),@Filter(type &#x3D; FilterType.CUSTOM, classes &#x3D; AutoConfigurationExcludeFilter.class)}<br>容器中将排除TypeExcludeFilter和AutoConfigurationExcludeFilter。</li>
 </ul>
-<p>解题的代码如下，思路和上文中提到的一样：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Trie</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">int</span> <span class="token class-name">N</span> <span class="token operator">=</span> <span class="token number">100009</span><span class="token punctuation">;</span> <span class="token comment">// 直接设置为十万级</span>
-    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> trie<span class="token punctuation">;</span>
-    <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> count<span class="token punctuation">;</span>
-    <span class="token keyword">int</span> index<span class="token punctuation">;</span>
+<h2 id="2-1-EnableAutoConfiguration-实现自动装配的核心注解"><a href="#2-1-EnableAutoConfiguration-实现自动装配的核心注解" class="headerlink" title="2.1@EnableAutoConfiguration:实现自动装配的核心注解"></a>2.1@EnableAutoConfiguration:实现自动装配的核心注解</h2><p>EnableAutoConfiguration 只是一个简单地注解，自动装配核心功能的实现实际是通过 AutoConfigurationImportSelector类。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token class-name">ElementType</span><span class="token punctuation">.</span><span class="token constant">TYPE</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span><span class="token class-name">RetentionPolicy</span><span class="token punctuation">.</span><span class="token constant">RUNTIME</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Documented</span>
+<span class="token annotation punctuation">@Inherited</span>
+<span class="token annotation punctuation">@AutoConfigurationPackage</span> <span class="token comment">//作用：将main包下的所有组件注册到容器中</span>
+<span class="token annotation punctuation">@Import</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token class-name">AutoConfigurationImportSelector</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token comment">//加载自动装配类 xxxAutoconfiguration</span>
+<span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">EnableAutoConfiguration</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">String</span> <span class="token constant">ENABLED_OVERRIDE_PROPERTY</span> <span class="token operator">=</span> <span class="token string">"spring.boot.enableautoconfiguration"</span><span class="token punctuation">;</span>
 
-    <span class="token keyword">public</span> <span class="token class-name">Trie</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        trie <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token class-name">N</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">26</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//因为有26个字母，所以有26个分叉</span>
-        count <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token class-name">N</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-        index <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span><span class="token comment">//初试的节点下标（根节点）</span>
-    <span class="token punctuation">&#125;</span>
-    
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">insert</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">int</span> p <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">int</span> u <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token char">'a'</span><span class="token punctuation">;</span>
-            <span class="token comment">//如果没有这个节点，就创建这个节点，index要增加</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>trie<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> trie<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">++</span>index<span class="token punctuation">;</span>
-            p <span class="token operator">=</span> trie<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        count<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">search</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">int</span> p <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">int</span> u <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token char">'a'</span><span class="token punctuation">;</span>
-            <span class="token comment">//不存在这条路径，就返回false</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>trie<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-            p <span class="token operator">=</span> trie<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> count<span class="token punctuation">[</span>p<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    
-    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token class-name">String</span> s<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">int</span> p <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> s<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">int</span> u <span class="token operator">=</span> s<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token char">'a'</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>trie<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-            p <span class="token operator">=</span> trie<span class="token punctuation">[</span>p<span class="token punctuation">]</span><span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">exclude</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 
-<h1 id="3-变形题"><a href="#3-变形题" class="headerlink" title="3. 变形题"></a>3. 变形题</h1><p><a  href ="https://leetcode.cn/problems/maximum-xor-of-two-numbers-in-an-array/description/">421. 数组中两个数的最大异或值</a></p>
-<blockquote>
-<p>给你一个整数数组 nums ，返回 nums[i] XOR nums[j] 的最大运算结果，其中 0 ≤ i ≤ j &lt; n 。</p>
-</blockquote>
-<p>示例 1：</p>
-<blockquote>
-<p>输入：nums &#x3D; [3,10,5,25,2,8]<br>输出：28<br>解释：最大运算结果是 5 XOR 25 &#x3D; 28.</p>
-</blockquote>
-<p>示例 2：</p>
-<blockquote>
-<p>输入：nums &#x3D; [14,70,53,83,49,91,36,80,92,51,66,70]<br>输出：127</p>
-</blockquote>
-<p>这道问题我们采用的是前缀树加上贪心的思路。我们将遍历到i之前的所有数字全加入到Trie树中，同时将第i个数也加入。此时我们有个贪心的思路，就是说在Trie树中，我们对于nums[i]，由于是异或，所以我们要寻找和nums[i]当前位不一样的，比如nums[i]当前位是1，我们就要找是0的数字。</p>
-<p>具体实现代码如下：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">class</span> <span class="token class-name">Node</span><span class="token punctuation">&#123;</span>
-        <span class="token class-name">Node</span><span class="token punctuation">[</span><span class="token punctuation">]</span> ns <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//因为只有0/1，所以大小为2</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token class-name">Node</span> root <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token class-name">Node</span> p <span class="token operator">=</span> root<span class="token punctuation">;</span>
-        <span class="token comment">//int位数为32位，全部遍历，从高到低</span>
-        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">31</span><span class="token punctuation">;</span> i <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token keyword">int</span> u <span class="token operator">=</span> <span class="token punctuation">(</span>x <span class="token operator">>></span> i<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">;</span>
-            <span class="token comment">//没有这个节点，就创建</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>ns<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> p<span class="token punctuation">.</span>ns<span class="token punctuation">[</span>u<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            p <span class="token operator">=</span> p<span class="token punctuation">.</span>ns<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
+    <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">excludeName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>我们现在重点分析下AutoConfigurationImportSelector 类到底做了什么？</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AutoConfigurationImportSelector</span> <span class="token keyword">implements</span> <span class="token class-name">DeferredImportSelector</span><span class="token punctuation">,</span> <span class="token class-name">BeanClassLoaderAware</span><span class="token punctuation">,</span> <span class="token class-name">ResourceLoaderAware</span><span class="token punctuation">,</span> <span class="token class-name">BeanFactoryAware</span><span class="token punctuation">,</span> <span class="token class-name">EnvironmentAware</span><span class="token punctuation">,</span> <span class="token class-name">Ordered</span> <span class="token punctuation">&#123;</span>
 
-    <span class="token keyword">int</span> <span class="token function">getVal</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-        <span class="token class-name">Node</span> p <span class="token operator">=</span> root<span class="token punctuation">;</span>
-        <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">31</span><span class="token punctuation">;</span> i <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-            <span class="token comment">//我们期望b是a不一样的</span>
-            <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token punctuation">(</span>x <span class="token operator">>></span> i<span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">,</span> b <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">-</span> a<span class="token punctuation">;</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span>p<span class="token punctuation">.</span>ns<span class="token punctuation">[</span>b<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
-                <span class="token comment">//此时b存在，符合期望，我们就把b按照位数还原</span>
-                ans <span class="token operator">|=</span> <span class="token punctuation">(</span>b <span class="token operator">&lt;&lt;</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                p <span class="token operator">=</span> p<span class="token punctuation">.</span>ns<span class="token punctuation">[</span>b<span class="token punctuation">]</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
-                <span class="token comment">//不存在期望的b，我们只能走a的路线</span>
-                <span class="token comment">//记得最后将p指向我们移动后的位置</span>
-                ans <span class="token operator">|=</span> <span class="token punctuation">(</span>a <span class="token operator">&lt;&lt;</span> i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                p <span class="token operator">=</span> p<span class="token punctuation">.</span>ns<span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token punctuation">;</span>
-            <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">&#125;</span> 
-        <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">findMaximumXOR</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">:</span> nums<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token function">add</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token function">getVal</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            ans <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>ans<span class="token punctuation">,</span> i <span class="token operator">^</span> j<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h1 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h1><p>学了一下午，做了两个题，但是还是很有收获的。Trie的基本性质通过这两个题有所了解，继续更新这个Trie的会。</p>
+<span class="token punctuation">&#125;</span>
 
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">DeferredImportSelector</span> <span class="token keyword">extends</span> <span class="token class-name">ImportSelector</span> <span class="token punctuation">&#123;</span>
+
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">ImportSelector</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">selectImports</span><span class="token punctuation">(</span><span class="token class-name">AnnotationMetadata</span> var1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>可以看出，AutoConfigurationImportSelector 类实现了 ImportSelector接口，也就实现了这个接口中的 selectImports方法，该方法主要用于获取所有符合条件的类的全限定类名，这些类需要被加载到 IoC 容器中。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token constant">NO_IMPORTS</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">public</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">selectImports</span><span class="token punctuation">(</span><span class="token class-name">AnnotationMetadata</span> annotationMetadata<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">// &lt;1>.判断自动装配开关是否打开</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">isEnabled</span><span class="token punctuation">(</span>annotationMetadata<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token constant">NO_IMPORTS</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+          <span class="token comment">//&lt;2>.获取所有需要装配的bean</span>
+            <span class="token class-name">AutoConfigurationMetadata</span> autoConfigurationMetadata <span class="token operator">=</span> <span class="token class-name">AutoConfigurationMetadataLoader</span><span class="token punctuation">.</span><span class="token function">loadMetadata</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>beanClassLoader<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">AutoConfigurationImportSelector<span class="token punctuation">.</span>AutoConfigurationEntry</span> autoConfigurationEntry <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getAutoConfigurationEntry</span><span class="token punctuation">(</span>autoConfigurationMetadata<span class="token punctuation">,</span> annotationMetadata<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">toStringArray</span><span class="token punctuation">(</span>autoConfigurationEntry<span class="token punctuation">.</span><span class="token function">getConfigurations</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>这里我们需要重点关注一下getAutoConfigurationEntry()方法，这个方法主要负责加载自动配置类的。<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230403084719.png" alt="20230403084719"></p>
+<p>现在我们结合getAutoConfigurationEntry()的源码来详细分析一下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">AutoConfigurationEntry</span> <span class="token constant">EMPTY_ENTRY</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AutoConfigurationEntry</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token class-name">AutoConfigurationEntry</span> <span class="token function">getAutoConfigurationEntry</span><span class="token punctuation">(</span><span class="token class-name">AutoConfigurationMetadata</span> autoConfigurationMetadata<span class="token punctuation">,</span> <span class="token class-name">AnnotationMetadata</span> annotationMetadata<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//&lt;1>.</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">isEnabled</span><span class="token punctuation">(</span>annotationMetadata<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token constant">EMPTY_ENTRY</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">//&lt;2>.</span>
+            <span class="token class-name">AnnotationAttributes</span> attributes <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getAttributes</span><span class="token punctuation">(</span>annotationMetadata<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">//&lt;3>.</span>
+            <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> configurations <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getCandidateConfigurations</span><span class="token punctuation">(</span>annotationMetadata<span class="token punctuation">,</span> attributes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment">//&lt;4>.</span>
+            configurations <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">removeDuplicates</span><span class="token punctuation">(</span>configurations<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> exclusions <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getExclusions</span><span class="token punctuation">(</span>annotationMetadata<span class="token punctuation">,</span> attributes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">checkExcludedClasses</span><span class="token punctuation">(</span>configurations<span class="token punctuation">,</span> exclusions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            configurations<span class="token punctuation">.</span><span class="token function">removeAll</span><span class="token punctuation">(</span>exclusions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            configurations <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>configurations<span class="token punctuation">,</span> autoConfigurationMetadata<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fireAutoConfigurationImportEvents</span><span class="token punctuation">(</span>configurations<span class="token punctuation">,</span> exclusions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">AutoConfigurationImportSelector<span class="token punctuation">.</span>AutoConfigurationEntry</span><span class="token punctuation">(</span>configurations<span class="token punctuation">,</span> exclusions<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>第 1 步:<br>判断自动装配开关是否打开。默认spring.boot.enableautoconfiguration&#x3D;true，可在 application.properties 或 application.yml 中设置<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230403084903.png" alt="20230403084903"></p>
+<p>第 2 步 ：</p>
+<p>用于获取EnableAutoConfiguration注解中的 exclude 和 excludeName。<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230403084927.png" alt="20230403084927"></p>
+<p>第 3 步:</p>
+<p>获取需要自动装配的所有配置类，读取META-INF&#x2F;spring.factories</p>
+<pre class="line-numbers language-text" data-language="text"><code class="language-text">spring-boot/spring-boot-project/spring-boot-autoconfigure/src/main/resources/META-INF/spring.factories<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230403085022.png" alt="20230403085022"></p>
+<p>从下图可以看到这个文件的配置内容都被我们读取到了。XXXAutoConfiguration的作用就是按需加载组件。<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230403085048.png" alt="20230403085048"><br>不光是这个依赖下的META-INF&#x2F;spring.factories被读取到，所有 Spring Boot Starter 下的META-INF&#x2F;spring.factories都会被读取到。所以，你可以清楚滴看到， druid 数据库连接池的 Spring Boot Starter 就创建了META-INF&#x2F;spring.factories文件。<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230403090605.png" alt="20230403090605"></p>
+<p>第 4 步 ：<br>到这里可能面试官会问你:“spring.factories中这么多配置，每次启动都要全部加载么？”。很明显，这是不现实的。我们 debug 到后面你会发现，configurations 的值变小了。</p>
+<p>因为，这一步有经历了一遍筛选，@ConditionalOnXXX 中的所有条件都满足，该类才会生效。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
+<span class="token comment">// 检查相关的类：RabbitTemplate 和 Channel是否存在</span>
+<span class="token comment">// 存在才会加载</span>
+<span class="token annotation punctuation">@ConditionalOnClass</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token class-name">RabbitTemplate</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token class-name">Channel</span><span class="token punctuation">.</span><span class="token keyword">class</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@EnableConfigurationProperties</span><span class="token punctuation">(</span><span class="token class-name">RabbitProperties</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+<span class="token annotation punctuation">@Import</span><span class="token punctuation">(</span><span class="token class-name">RabbitAnnotationDrivenConfiguration</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RabbitAutoConfiguration</span> <span class="token punctuation">&#123;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -611,7 +587,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/04/02/trie-qian-zhui-shu/">http://example.com/2023/04/02/trie-qian-zhui-shu/</a>
+                    <a href="http://example.com/2023/04/03/springboot-zi-dong-zhuang-pei-jian-jie/">http://example.com/2023/04/03/springboot-zi-dong-zhuang-pei-jian-jie/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -649,20 +625,16 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98/">
-                                    <span class="chip bg-color">力扣刷题</span>
+                                <a href="/tags/%E9%9D%A2%E8%AF%95/">
+                                    <span class="chip bg-color">面试</span>
                                 </a>
                             
-                                <a href="/tags/Trie/">
-                                    <span class="chip bg-color">Trie</span>
+                                <a href="/tags/springboot/">
+                                    <span class="chip bg-color">springboot</span>
                                 </a>
                             
-                                <a href="/tags/%E5%89%8D%E7%BC%80%E6%A0%91/">
-                                    <span class="chip bg-color">前缀树</span>
-                                </a>
-                            
-                                <a href="/tags/%E5%AD%97%E5%85%B8%E6%A0%91/">
-                                    <span class="chip bg-color">字典树</span>
+                                <a href="/tags/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">
+                                    <span class="chip bg-color">自动装配</span>
                                 </a>
                             
                         </div>
@@ -741,9 +713,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
                 <a href="/2023/04/03/springboot-zi-dong-zhuang-pei-jian-jie/">
                     <div class="card-image">
@@ -761,9 +734,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -780,6 +753,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -806,13 +780,13 @@
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/03/31/spring-mian-shi-shi-wu/">
+                <a href="/2023/04/02/trie-qian-zhui-shu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="spring面试-事务">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Trie 前缀树（字典树）">
                         
-                        <span class="card-title">spring面试-事务</span>
+                        <span class="card-title">Trie 前缀树（字典树）</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -823,14 +797,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-31
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-02
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/spring%E9%9D%A2%E8%AF%95/" class="post-category">
-                                    spring面试
+                            <a href="/categories/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98/" class="post-category">
+                                    力扣刷题
                                 </a>
                             
                             
@@ -840,12 +814,20 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/spring/">
-                        <span class="chip bg-color">spring</span>
+                    <a href="/tags/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98/">
+                        <span class="chip bg-color">力扣刷题</span>
                     </a>
                     
-                    <a href="/tags/%E4%BA%8B%E5%8A%A1/">
-                        <span class="chip bg-color">事务</span>
+                    <a href="/tags/Trie/">
+                        <span class="chip bg-color">Trie</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%89%8D%E7%BC%80%E6%A0%91/">
+                        <span class="chip bg-color">前缀树</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%AD%97%E5%85%B8%E6%A0%91/">
+                        <span class="chip bg-color">字典树</span>
                     </a>
                     
                 </div>
