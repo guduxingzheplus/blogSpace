@@ -4,10 +4,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="session cookie jwt cookie 区别, 小林嘞">
-    <meta name="description" content="1. 什么是Cookie？
-cookie 存储在客户端： cookie 是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上。
-cookie 是不可跨域的： 每个 cookie 都">
+    <meta name="keywords" content="双滑动窗口典型题, 小林嘞">
+    <meta name="description" content="992. K 个不同整数的子数组
+最传统的想法就是使用基本的单滑动窗口来做，代码如下：
+import java.util.HashSet;
+import java.util.Set;
+
+class Solution &amp;#123;
+    p">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +23,7 @@ cookie 是不可跨域的： 每个 cookie 都">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>session cookie jwt cookie 区别 | 小林嘞</title>
+    <title>双滑动窗口典型题 | 小林嘞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -336,12 +340,12 @@ cookie 是不可跨域的： 每个 cookie 都">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">session cookie jwt cookie 区别</h1>
+                    <h1 class="description center-align post-title">双滑动窗口典型题</h1>
                 </div>
             </div>
         </div>
@@ -365,8 +369,12 @@ cookie 是不可跨域的： 每个 cookie 都">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%AE%89%E5%85%A8/">
-                                <span class="chip bg-color">安全</span>
+                            <a href="/tags/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98/">
+                                <span class="chip bg-color">力扣刷题</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
+                                <span class="chip bg-color">滑动窗口</span>
                             </a>
                         
                     </div>
@@ -377,8 +385,8 @@ cookie 是不可跨域的： 每个 cookie 都">
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%AE%A4%E8%AF%81%E6%8E%88%E6%9D%83/" class="post-category">
-                                认证授权
+                            <a href="/categories/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98/" class="post-category">
+                                力扣刷题
                             </a>
                         
                     </div>
@@ -390,7 +398,7 @@ cookie 是不可跨域的： 每个 cookie 都">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2023-04-19
+                    2023-04-20
                 </div>
                 
 
@@ -404,14 +412,14 @@ cookie 是不可跨域的： 每个 cookie 都">
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    3.5k
+                    420
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    12 Min
+                    1 Min
                 </div>
                 
 
@@ -434,150 +442,69 @@ cookie 是不可跨域的： 每个 cookie 都">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="1-什么是Cookie？"><a href="#1-什么是Cookie？" class="headerlink" title="1. 什么是Cookie？"></a>1. 什么是Cookie？</h1><ul>
-<li>cookie 存储在客户端： cookie 是服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上。</li>
-<li>cookie 是不可跨域的： 每个 cookie 都会绑定单一的域名，无法在别的域名下获取使用，一级域名和二级域名之间是允许共享使用的（靠的是 domain）。</li>
-</ul>
-<h1 id="2-什么是session？"><a href="#2-什么是session？" class="headerlink" title="2. 什么是session？"></a>2. 什么是session？</h1><ul>
-<li><p>session 是一种记录服务器和客户端会话状态的机制</p>
-</li>
-<li><p>session是基于cookie实现的， session存储在服务器端， sessionID会存储到客户端的cookie中<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230419150720.png" alt="20230419150720"></p>
-</li>
-<li><p>session认证流程：</p>
-<ul>
-<li>用户第一次请求服务器的时候，服务器根据用户提交的相关信息，创建对应的 Session</li>
-<li>请求返回时将此 Session 的唯一标识信息 SessionID 返回给浏览器</li>
-<li>浏览器接收到服务器返回的 SessionID 信息后，会将此信息存入到 Cookie 中，同时 Cookie 记录此 SessionID 属于哪个域名</li>
-<li>当用户第二次访问服务器的时候，请求会自动判断此域名下是否存在 Cookie 信息，如果存在自动将 Cookie 信息也发送给服务端，服务端会从 Cookie 中获取 SessionID，再根据 SessionID 查找对应的 Session 信息，如果没有找到说明用户没有登录或者登录失效，如果找到 Session 证明用户已经登录可执行后面操作</li>
-</ul>
-</li>
-</ul>
-<h1 id="3-什么是-Token（令牌）"><a href="#3-什么是-Token（令牌）" class="headerlink" title="3. 什么是 Token（令牌）"></a>3. 什么是 Token（令牌）</h1><ul>
-<li>访问资源接口（api）时需要的资源凭证</li>
-<li>简单token的组成： uid（用户身份标识），time（当前时间戳），sign（签名 token前几位以哈希压缩）</li>
-<li>特点：<ul>
-<li>服务端无状态化</li>
-<li>支持移动端设备</li>
-<li>安全</li>
-<li>支持跨程序</li>
-</ul>
-</li>
-<li>token 验证流程：<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230419151515.png" alt="20230419151515"></li>
-</ul>
-<ol>
-<li>客户端使用用户名跟密码请求登录</li>
-<li>服务端收到请求，去验证用户名与密码</li>
-<li>验证成功后，服务端会签发一个 token 并把这个 token 发送给客户端</li>
-<li>客户端收到 token 以后，会把它存储起来，比如放在 cookie 里或者 localStorage 里</li>
-<li>客户端每次向服务端请求资源的时候需要带着服务端签发的 token</li>
-<li>服务端收到请求，然后去验证客户端请求里面带着的 token ，如果验证成功，就向客户端返回请求的数据</li>
-</ol>
-<p>注意：</p>
-<ul>
-<li>每次请求都要带token，放到http的header中</li>
-<li>基于token是无状态认证，服务端不用存token，用解析token的时间换区session的存储空间</li>
-<li>token 完全由应用管理，所以它可以避开同源策略</li>
-</ul>
-<h1 id="4-什么是RefreshToken"><a href="#4-什么是RefreshToken" class="headerlink" title="4. 什么是RefreshToken"></a>4. 什么是RefreshToken</h1><p>就是专门用于刷新access token的一种token，如果没有refresh token，每次刷新都需要用户手动输入密码，这很不友好。有了refresh token，直接调用refresh token 去更新accesstoken</p>
-<p><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230419152255.png" alt="20230419152255"></p>
-<ul>
-<li>Access Token 的有效期比较短，当 Acesss Token 由于过期而失效时，使用 Refresh Token 就可以获取到新的 Token，如果 Refresh Token 也失效了，用户就只能重新登录了。</li>
-<li>Refresh Token 及过期时间是存储在服务器的数据库中，只有在申请新的 Acesss Token 时才会验证，不会对业务接口响应时间造成影响，也不需要向 Session 一样一直保持在内存中以应对大量的请求。</li>
-</ul>
-<h1 id="5-什么是jwt"><a href="#5-什么是jwt" class="headerlink" title="5. 什么是jwt"></a>5. 什么是jwt</h1><ul>
-<li>JSON Web Token（简称 JWT）是目前最流行的跨域认证解决方案。<br>是一种认证授权机制。</li>
-<li>JWT 是为了在网络应用环境间传递声明而执行的一种基于 JSON 的开放标准（RFC 7519）。JWT 的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源。比如用在用户登录上。</li>
-<li>可以使用 HMAC 算法或者是 RSA 的公&#x2F;私秘钥对 JWT 进行签名。因为数字签名的存在，这些传递的信息是可信的。<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230419152408.png" alt="20230419152408"></li>
-</ul>
-<p>JWT 认证流程：</p>
-<ul>
-<li><p>用户输入用户名&#x2F;密码登录，服务端认证成功后，会返回给客户端一个 JWT</p>
-</li>
-<li><p>客户端将 token 保存到本地（通常使用 localstorage，也可以使用 cookie）</p>
-</li>
-<li><p>当用户希望访问一个受保护的路由或者资源的时候，需要请求头的 Authorization 字段中使用Bearer 模式添加 JWT，其内容看起来是下面这样</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup">Authorization: Bearer <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>token</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-</li>
-<li><p>服务端的保护路由将会检查请求头 Authorization 中的 JWT 信息，如果合法，则允许用户的行为</p>
-</li>
-<li><p>因为 JWT 是自包含的（内部包含了一些会话信息），因此减少了需要查询数据库的需要</p>
-</li>
-<li><p>因为 JWT 并不使用 Cookie 的，所以你可以使用任何域名提供你的 API 服务而不需要担心跨域资源共享问题（CORS）</p>
-</li>
-<li><p>因为用户的状态不再存储在服务端的内存中，所以这是一种无状态的认证机制</p>
-</li>
-</ul>
-<h1 id="6-Cookie-和-Session区别"><a href="#6-Cookie-和-Session区别" class="headerlink" title="6.Cookie 和 Session区别"></a>6.Cookie 和 Session区别</h1><ul>
-<li>安全性：Session比cookie更安全，session是存在服务器的</li>
-<li>存取值的类型不同：cookie只支持字符串数据，session可以存任何数据类型</li>
-<li>有效期不同： cookie可以设置为长时间保持，默认的登录功能。session有效期比较短，客户端关闭或者超时session都会失效。</li>
-</ul>
-<h1 id="7-token-和-session的区别"><a href="#7-token-和-session的区别" class="headerlink" title="7. token 和 session的区别"></a>7. token 和 session的区别</h1><ul>
-<li>session是记录服务器和客户端的会话状态的<strong>机制</strong>，使服务端有状态化，可以记录会话信息，而token是<strong>令牌</strong>，访问资源的接口时所需要的资源凭证，token使得服务端无状态化，不会存储会话信息。</li>
-<li>session和token并不矛盾，作为身份认证，token比session更安全，因为每一个强求都有签名，还能防止重放攻击。而session必须依赖链路层来保证通讯安全。</li>
-<li>所谓 Session 认证只是简单的把 User 信息存储到 Session 里，因为 SessionID 的不可预测性，暂且认为是安全的。而 Token ，如果指的是 OAuth Token 或类似的机制的话，提供的是 认证 和 授权 ，认证是针对用户，授权是针对 App 。其目的是让某 App 有权利访问某用户的信息。这里的 Token 是唯一的。不可以转移到其它 App上，也不可以转到其它用户上。Session 只提供一种简单的认证，即只要有此 SessionID ，即认为有此 User 的全部权利。是需要严格保密的，这个数据应该只保存在站方，不应该共享给其它网站或者第三方 App。所以简单来说：如果你的用户数据可能需要和第三方共享，或者允许第三方调用 API 接口，用 Token 。如果永远只是自己的网站，自己的 App，用什么就无所谓了。</li>
-</ul>
-<h1 id="8-Token-和-JWT-的区别"><a href="#8-Token-和-JWT-的区别" class="headerlink" title="8. Token 和 JWT 的区别"></a>8. Token 和 JWT 的区别</h1><p>相同：</p>
-<ul>
-<li>都是访问资源的令牌</li>
-<li>都是记录用户的信息</li>
-<li>都是使得服务端无状态化</li>
-<li>都是只有验证成功后，客户端才能访问服务端上受保护的资源</li>
-</ul>
-<p>区别：</p>
-<ul>
-<li>token： 服务端验证客户端发过来的token的时候还是需要查询数据库获取用户的信息，然后验证token是否有效</li>
-<li>JWT： 将token和payload加密后存储于客户端，服务端只需要使用秘钥来进行解密校验（因为jwt<strong>自包含性质</strong>存储了部分的会话信息），减少查询数据库的需求。</li>
-</ul>
-<h1 id="9-使用cookie时间，需要考虑的问题"><a href="#9-使用cookie时间，需要考虑的问题" class="headerlink" title="9.使用cookie时间，需要考虑的问题"></a>9.使用cookie时间，需要考虑的问题</h1><ul>
-<li>因为存储在客户端，容易被客户端篡改，使用前需要验证合法性</li>
-<li>不要存储敏感数据，比如用户密码，账户余额</li>
-<li>使用 httpOnly 在一定程度上提高安全性</li>
-<li>尽量减少 cookie 的体积，能存储的数据量不能超过 4kb</li>
-<li>设置正确的 domain 和 path，减少数据传输</li>
-<li>cookie 无法跨域</li>
-<li>一个浏览器针对一个网站最多存 20 个Cookie，浏览器一般只允许存放 - 300 个Cookie</li>
-<li>移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token</li>
-</ul>
-<h1 id="10-使用-session-时需要考虑的问题"><a href="#10-使用-session-时需要考虑的问题" class="headerlink" title="10.使用 session 时需要考虑的问题"></a>10.使用 session 时需要考虑的问题</h1><ul>
-<li>将 session 存储在服务器里面，当用户同时在线量比较多时，这些 session 会占据较多的内存，需要在服务端定期的去清理过期的 session</li>
-<li>当网站采用集群部署的时候，会遇到多台 web 服务器之间如何做 session 共享的问题。因为 session 是由单个服务器创建的，但是处理用户请求的服务器不一定是那个创建 session 的服务器，那么该服务器就无法拿到之前已经放入到 session 中的登录凭证之类的信息了。</li>
-<li>当多个应用要共享 session 时，除了以上问题，还会遇到跨域问题，因为不同的应用可能部署的主机不一样，需要在各个应用做好 cookie 跨域的处理。</li>
-<li>sessionId 是存储在 cookie 中的，假如浏览器禁止 cookie 或不支持 cookie 怎么办？ 一般会把 sessionId 跟在 url 参数后面即重写 url，所以 session 不一定非得需要靠 cookie 实现</li>
-<li>移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token</li>
-</ul>
-<h1 id="11-使用-token-时需要考虑的问题"><a href="#11-使用-token-时需要考虑的问题" class="headerlink" title="11. 使用 token 时需要考虑的问题"></a>11. 使用 token 时需要考虑的问题</h1><ul>
-<li>如果你认为用数据库来存储 token 会导致查询时间太长，可以选择放在内存当中。比如 redis 很适合你对 token 查询的需求。</li>
-<li>token 完全由应用管理，所以它可以避开同源策略</li>
-<li>token 可以避免 CSRF 攻击(因为不需要 cookie 了)</li>
-<li>移动端对 cookie 的支持不是很好，而 session 需要基于 cookie 实现，所以移动端常用的是 token</li>
-</ul>
-<h1 id="12-使用-JWT-时需要考虑的问题"><a href="#12-使用-JWT-时需要考虑的问题" class="headerlink" title="12. 使用 JWT 时需要考虑的问题"></a>12. 使用 JWT 时需要考虑的问题</h1><ul>
-<li>因为 JWT 并不依赖 Cookie 的，所以你可以使用任何域名提供你的 API 服务而不需要担心跨域资源共享问题（CORS）</li>
-<li>JWT 默认是不加密，但也是可以加密的。生成原始 Token 以后，可以用密钥再加密一次。</li>
-<li>JWT 不加密的情况下，不能将秘密数据写入 JWT。</li>
-<li>JWT 不仅可以用于认证，也可以用于交换信息。有效使用 JWT，可以降低服务器查询数据库的次数。</li>
-<li>JWT 最大的优势是服务器不再需要存储 Session，使得服务器认证鉴权业务可以方便扩展。但这也是 JWT 最大的缺点：由于服务器不需要存储 Session 状态，因此使用过程中无法废弃某个 Token 或者更改 Token 的权限。也就是说一旦 JWT 签发了，到期之前就会始终有效，除非服务器部署额外的逻辑。</li>
-<li>JWT 本身包含了认证信息，一旦泄露，任何人都可以获得该令牌的所有权限。为了减少盗用，JWT的有效期应该设置得比较短。对于一些比较重要的权限，使用时应该再次对用户进行认证。</li>
-<li>JWT 适合一次性的命令认证，颁发一个有效期极短的 JWT，即使暴露了危险也很小，由于每次操作都会生成新的 JWT，因此也没必要保存 JWT，真正实现无状态。</li>
-<li>为了减少盗用，JWT 不应该使用 HTTP 协议明码传输，要使用 HTTPS 协议传输。</li>
-</ul>
-<h1 id="13-分布式架构下-session-共享方案"><a href="#13-分布式架构下-session-共享方案" class="headerlink" title="13. 分布式架构下 session 共享方案"></a>13. 分布式架构下 session 共享方案</h1><h2 id="13-1-session-复制"><a href="#13-1-session-复制" class="headerlink" title="13.1. session 复制"></a>13.1. session 复制</h2><p>任何一个服务器上的 session 发生改变（增删改），该节点会把这个 session 的所有内容序列化，然后广播给所有其它节点，不管其他服务器需不需要 session ，以此来保证 session 同步</p>
-<p>优点： 可容错，各个服务器间 session 能够实时响应。</p>
-<p>缺点： 会对网络负荷造成一定压力，如果 session 量大的话可能会造成网络堵塞，拖慢服务器性能。</p>
-<h2 id="13-2-粘性-session-x2F-IP-绑定策略"><a href="#13-2-粘性-session-x2F-IP-绑定策略" class="headerlink" title="13.2. 粘性 session &#x2F;IP 绑定策略"></a>13.2. 粘性 session &#x2F;IP 绑定策略</h2><p>采用 Ngnix 中的 ip_hash 机制，将某个 ip的所有请求都定向到同一台服务器上，即将用户与服务器绑定。 用户第一次请求时，负载均衡器将用户的请求转发到了 A 服务器上，如果负载均衡器设置了粘性 session 的话，那么用户以后的每次请求都会转发到 A 服务器上，相当于把用户和 A 服务器粘到了一块，这就是粘性 session 机制。</p>
-<p>优点： 简单，不需要对 session 做任何处理。</p>
-<p>缺点： 缺乏容错性，如果当前访问的服务器发生故障，用户被转移到第二个服务器上时，他的 session 信息都将失效。</p>
-<p>适用场景： 发生故障对客户产生的影响较小；服务器发生故障是低概率事件<br>。<br>实现方式： 以 Nginx 为例，在 upstream 模块配置 ip_hash 属性即可实现粘性 session。</p>
-<h2 id="13-3-session-共享（常用）"><a href="#13-3-session-共享（常用）" class="headerlink" title="13.3. session 共享（常用）"></a>13.3. session 共享（常用）</h2><p>使用分布式缓存方案比如 Memcached 、Redis 来缓存 session，但是要求 Memcached 或 Redis 必须是集群<br>把 session 放到 Redis 中存储，虽然架构上变得复杂，并且需要多访问一次 Redis ，但是这种方案带来的好处也是很大的：</p>
-<p>实现了 session 共享；<br>可以水平扩展（增加 Redis 服务器）；<br>服务器重启 session 不丢失（不过也要注意 session 在 Redis 中的刷新&#x2F;失效机制）；<br>不仅可以跨服务器 session 共享，甚至可以跨平台（例如网页端和 APP 端）<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230420171956.png" alt="20230420171956"></p>
-<h2 id="13-4"><a href="#13-4" class="headerlink" title="13.4"></a>13.4</h2><ol start="4">
-<li>session 持久化</li>
-</ol>
-<p>将 session 存储到数据库中，保证 session 的持久化</p>
-<p>优点： 服务器出现问题，session 不会丢失</p>
-<p>缺点： 如果网站的访问量很大，把 session 存储到数据库中，会对数据库造成很大压力，还需要增加额外的开销维护数据库。</p>
+                <h1 id="992-K-个不同整数的子数组"><a href="#992-K-个不同整数的子数组" class="headerlink" title="992. K 个不同整数的子数组"></a>992. K 个不同整数的子数组</h1><p><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230420172551.png" alt="20230420172551"></p>
+<p>最传统的想法就是使用基本的单滑动窗口来做，代码如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">HashSet</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Set</span></span><span class="token punctuation">;</span>
 
+<span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">subarraysWithKDistinct</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> k<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> startIndex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> endIndex <span class="token operator">=</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> re <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">></span></span> set <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashSet</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n <span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> i<span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                <span class="token keyword">int</span> temp <span class="token operator">=</span> nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+                set<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>temp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>set<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> k<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                    re<span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+                <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>set<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> k<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                    set<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+            set<span class="token punctuation">.</span><span class="token function">clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token keyword">return</span> re<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是会超时，因为时间复杂度比较高，主要的时间都浪费在了反复判断是不是重复数字上。需要想办法使得其具有记忆化效果，于是使用双重滑窗。</p>
+<p>思路如下：</p>
+<p><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230420172815.png" alt="20230420172815"><br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230420172828.png" alt="20230420172828"></p>
+<p>关键在于怎么找最远出现的满足K个不同数字的下标。我们可以采用HashMap的形式来记录，从左到右，如果hashMap中的数量大于等于k，那么就删除最左侧的元素(left指针记录)，这样，我们就找到了位于最远的满足k个不同字符的下标这一条件了。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">subarraysWithKDistinct</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> k<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// // [k, k] = [-∞, k] - [-∞, k - 1]</span>
+    <span class="token keyword">return</span> <span class="token function">atMostK</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> k<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token function">atMostK</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> k <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">// 计算不同整数的个数不超过 k 的子数组</span>
+<span class="token keyword">private</span> <span class="token keyword">int</span> <span class="token function">atMostK</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> k<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">></span></span> window <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> left <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> right <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>right <span class="token operator">&lt;</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> g <span class="token operator">=</span> nums<span class="token punctuation">[</span>right<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        window<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>g<span class="token punctuation">,</span> window<span class="token punctuation">.</span><span class="token function">getOrDefault</span><span class="token punctuation">(</span>g<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 收缩窗口</span>
+        <span class="token keyword">while</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> k<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> d <span class="token operator">=</span> nums<span class="token punctuation">[</span>left<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            window<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>d<span class="token punctuation">,</span> window<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>window<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> window<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token comment">// 更新答案</span>
+        <span class="token comment">// 以 nums[right] 结尾的子数组数量</span>
+        ans <span class="token operator">+=</span> <span class="token punctuation">(</span>right <span class="token operator">-</span> left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -603,7 +530,7 @@ cookie 是不可跨域的： 每个 cookie 都">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/04/19/session-cookie-jwt-cookie-qu-bie/">http://example.com/2023/04/19/session-cookie-jwt-cookie-qu-bie/</a>
+                    <a href="http://example.com/2023/04/20/shuang-hua-dong-chuang-kou-dian-xing-ti/">http://example.com/2023/04/20/shuang-hua-dong-chuang-kou-dian-xing-ti/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -641,8 +568,12 @@ cookie 是不可跨域的： 每个 cookie 都">
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%AE%89%E5%85%A8/">
-                                    <span class="chip bg-color">安全</span>
+                                <a href="/tags/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98/">
+                                    <span class="chip bg-color">力扣刷题</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
+                                    <span class="chip bg-color">滑动窗口</span>
                                 </a>
                             
                         </div>
@@ -721,9 +652,10 @@ cookie 是不可跨域的： 每个 cookie 都">
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
                 <a href="/2023/04/20/shuang-hua-dong-chuang-kou-dian-xing-ti/">
                     <div class="card-image">
@@ -741,9 +673,9 @@ cookie 是不可跨域的： 每个 cookie 都">
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -756,6 +688,7 @@ cookie 是不可跨域的： 每个 cookie 都">
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -778,13 +711,13 @@ cookie 是不可跨域的： 每个 cookie 都">
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/04/19/ren-zheng-shou-quan/">
+                <a href="/2023/04/19/session-cookie-jwt-cookie-qu-bie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="认证授权">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="session cookie jwt cookie 区别">
                         
-                        <span class="card-title">认证授权</span>
+                        <span class="card-title">session cookie jwt cookie 区别</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -814,10 +747,6 @@ cookie 是不可跨域的： 每个 cookie 都">
                     
                     <a href="/tags/%E5%AE%89%E5%85%A8/">
                         <span class="chip bg-color">安全</span>
-                    </a>
-                    
-                    <a href="/tags/%E8%AE%A4%E8%AF%81%E6%8E%88%E6%9D%83%E5%9F%BA%E7%A1%80/">
-                        <span class="chip bg-color">认证授权基础</span>
                     </a>
                     
                 </div>
