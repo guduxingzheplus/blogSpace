@@ -4,10 +4,17 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Springboot 自动装配简介, 小林嘞">
-    <meta name="description" content="1. 什么是springBoot自动装配？实际上自动装配在Spring Framework中早就实现了这个功能。spring boot只是在这个基础上，通过spi的方式，做了进一步优化。
+    <meta name="keywords" content="认证授权, 小林嘞">
+    <meta name="description" content="
 
-springBoot自己定义了一套接口规范，在启动">
+
+认证和授权区别
+RBAC
+cookie
+Cookie 和 Session 有什么区别？
+cookie + session 方案验证用户的身份
+多服务器节点下 Session-Cookie 方案如何做？
+没有cookie是否可以使用se">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +26,7 @@ springBoot自己定义了一套接口规范，在启动">
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Springboot 自动装配简介 | 小林嘞</title>
+    <title>认证授权 | 小林嘞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -336,12 +343,12 @@ springBoot自己定义了一套接口规范，在启动">
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Springboot 自动装配简介</h1>
+                    <h1 class="description center-align post-title">认证授权</h1>
                 </div>
             </div>
         </div>
@@ -365,16 +372,12 @@ springBoot自己定义了一套接口规范，在启动">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/springboot/">
-                                <span class="chip bg-color">springboot</span>
+                            <a href="/tags/%E5%AE%89%E5%85%A8/">
+                                <span class="chip bg-color">安全</span>
                             </a>
                         
-                            <a href="/tags/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">
-                                <span class="chip bg-color">自动装配</span>
-                            </a>
-                        
-                            <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                                <span class="chip bg-color">面试</span>
+                            <a href="/tags/%E8%AE%A4%E8%AF%81%E6%8E%88%E6%9D%83%E5%9F%BA%E7%A1%80/">
+                                <span class="chip bg-color">认证授权基础</span>
                             </a>
                         
                     </div>
@@ -385,12 +388,8 @@ springBoot自己定义了一套接口规范，在启动">
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/spring%E9%9D%A2%E8%AF%95/" class="post-category">
-                                spring面试
-                            </a>
-                        
-                            <a href="/categories/spring%E9%9D%A2%E8%AF%95/springBoot%E5%8E%9F%E7%90%86/" class="post-category">
-                                springBoot原理
+                            <a href="/categories/%E8%AE%A4%E8%AF%81%E6%8E%88%E6%9D%83/" class="post-category">
+                                认证授权
                             </a>
                         
                     </div>
@@ -402,28 +401,28 @@ springBoot自己定义了一套接口规范，在启动">
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2023-04-03
+                    2023-04-19
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2023-04-03
+                    2023-04-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    1.2k
+                    3.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    5 Min
+                    11 Min
                 </div>
                 
 
@@ -446,122 +445,151 @@ springBoot自己定义了一套接口规范，在启动">
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="1-什么是springBoot自动装配？"><a href="#1-什么是springBoot自动装配？" class="headerlink" title="1. 什么是springBoot自动装配？"></a>1. 什么是springBoot自动装配？</h1><p>实际上自动装配在Spring Framework中早就实现了这个功能。spring boot只是在这个基础上，通过spi的方式，做了进一步优化。</p>
-<blockquote>
-<p>springBoot自己定义了一套接口规范，在启动时会去扫描外部引用的jar包中的META-INF&#x2F;spring.factories文件，将文件中的配置信息的类型信息加载到spring容器中，并执行类中定义的各种操作。对于外部jar来说，只需要按照springboot定义的标准，就能将自己的功能装置加载进springboot。</p>
-</blockquote>
-<p>没有spring boot的情况下，我们需要引入第三方依赖，需要手动配置，但是springboot里，直接引入一个strarter即可。比如想在项目主使用redis，那么引入对应的starter就好了</p>
-<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.springframework.boot<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span>
-    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>spring-boot-starter-data-redis<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>然后再引入少量的注解和一些简单配置就行了。<br>自动装配可以理解为： <strong>通过注解或者一些简单配置就能在springboot的帮助下，实现某块功能。</strong>  </p>
-<h1 id="2-springBoot是如何实现自动装配的"><a href="#2-springBoot是如何实现自动装配的" class="headerlink" title="2. springBoot是如何实现自动装配的"></a>2. springBoot是如何实现自动装配的</h1><p>核心注解就是@SpringBootApplication，源代码如下：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token class-name">ElementType</span><span class="token punctuation">.</span><span class="token constant">TYPE</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span><span class="token class-name">RetentionPolicy</span><span class="token punctuation">.</span><span class="token constant">RUNTIME</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@Documented</span>
-<span class="token annotation punctuation">@Inherited</span>
-<span class="token generics"><span class="token punctuation">&lt;</span>1<span class="token punctuation">.</span><span class="token punctuation">></span></span><span class="token annotation punctuation">@SpringBootConfiguration</span>
-<span class="token generics"><span class="token punctuation">&lt;</span>2<span class="token punctuation">.</span><span class="token punctuation">></span></span><span class="token annotation punctuation">@ComponentScan</span>
-<span class="token generics"><span class="token punctuation">&lt;</span>3<span class="token punctuation">.</span><span class="token punctuation">></span></span><span class="token annotation punctuation">@EnableAutoConfiguration</span>
-<span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">SpringBootApplication</span> <span class="token punctuation">&#123;</span>
+                <!-- TOC -->
 
-<span class="token punctuation">&#125;</span>
-
-<span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token class-name">ElementType</span><span class="token punctuation">.</span><span class="token constant">TYPE</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span><span class="token class-name">RetentionPolicy</span><span class="token punctuation">.</span><span class="token constant">RUNTIME</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@Documented</span>
-<span class="token annotation punctuation">@Configuration</span> <span class="token comment">//实际上它也是一个配置类</span>
-<span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">SpringBootConfiguration</span> <span class="token punctuation">&#123;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>可以看到，@SpringBootApplication可以理解为@SpringBootConfiguration，@ComponentScan，@EnableAutoConfiguration三者的组合。<br>作用如下：  </p>
 <ul>
-<li>@EnableAutoConfiguration：开启自动装配</li>
-<li>@Configuration: 允许上下文中注册额外的bean或导入其他配置类。</li>
-<li>@ComponentScan： 扫描被@Component修饰的bean，默认会扫描启动类所在的包下的所有类，可以自定义不扫描的某些bean，使用 @ComponentScan（excludeFilters &#x3D; {@Filter(type &#x3D; FilterType.CUSTOM, classes &#x3D; TypeExcluderFilter.class),@Filter(type &#x3D; FilterType.CUSTOM, classes &#x3D; AutoConfigurationExcludeFilter.class)}<br>容器中将排除TypeExcludeFilter和AutoConfigurationExcludeFilter。</li>
+<li><a href="#%E8%AE%A4%E8%AF%81%E5%92%8C%E6%8E%88%E6%9D%83%E5%8C%BA%E5%88%AB">认证和授权区别</a></li>
+<li><a href="#rbac">RBAC</a></li>
+<li><a href="#cookie">cookie</a></li>
+<li><a href="#cookie-%E5%92%8C-session-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB">Cookie 和 Session 有什么区别？</a></li>
+<li><a href="#cookie--session-%E6%96%B9%E6%A1%88%E9%AA%8C%E8%AF%81%E7%94%A8%E6%88%B7%E7%9A%84%E8%BA%AB%E4%BB%BD">cookie + session 方案验证用户的身份</a></li>
+<li><a href="#%E5%A4%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8A%82%E7%82%B9%E4%B8%8B-session-cookie-%E6%96%B9%E6%A1%88%E5%A6%82%E4%BD%95%E5%81%9A">多服务器节点下 Session-Cookie 方案如何做？</a></li>
+<li><a href="#%E6%B2%A1%E6%9C%89cookie%E6%98%AF%E5%90%A6%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8session">没有cookie是否可以使用session？</a></li>
+<li><a href="#cookie-%E4%B8%8D%E5%8F%AF%E4%BB%A5%E9%98%B2%E6%AD%A2csrf%E6%94%BB%E5%87%BB%E8%80%8Ctoken%E5%8F%AF%E4%BB%A5">cookie 不可以防止csrf攻击，而token可以？</a></li>
+<li><a href="#jwt">JWT</a><ul>
+<li><a href="#jwt%E7%9A%84%E4%BC%98%E5%8A%BF">jwt的优势</a></li>
+<li><a href="#jwt%E7%9A%84%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86">JWT的组成部分</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8Ejwt%E8%BF%9B%E8%A1%8C%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81">基于JWT进行身份验证</a></li>
+<li><a href="#%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2-jwt-%E8%A2%AB%E7%AF%A1%E6%94%B9">如何防止 JWT 被篡改？</a></li>
+<li><a href="#%E9%82%A3%E4%B8%BA%E4%BB%80%E4%B9%88-jwt-%E4%B8%8D%E4%BC%9A%E5%AD%98%E5%9C%A8csrf%E6%94%BB%E5%87%BB%E9%97%AE%E9%A2%98">那为什么 JWT 不会存在csrf攻击问题？</a></li>
+<li><a href="#token%E5%92%8Cjwt%E5%8C%BA%E5%88%AB">token和jwt区别</a></li>
+<li><a href="#jwt%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95">JWT身份认证常见问题及解决办法</a><ul>
+<li><a href="#%E6%B3%A8%E9%94%80%E7%99%BB%E5%BD%95%E5%9C%BA%E6%99%AF%E4%B8%8Bjwt%E8%BF%98%E6%9C%89%E6%95%88">注销登录场景下JWT还有效</a><ul>
+<li><a href="#%E5%B0%86jwt%E5%AD%98%E5%85%A5%E5%86%85%E5%AD%98%E6%95%B0%E6%8D%AE%E5%BA%93">将JWT存入内存数据库</a></li>
+<li><a href="#%E9%BB%91%E5%90%8D%E5%8D%95%E6%9C%BA%E5%88%B6">黑名单机制</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9%E7%A7%98%E9%92%A5">修改秘钥</a></li>
+<li><a href="#%E4%BF%9D%E8%AF%81%E4%BB%A4%E7%89%8C%E7%9A%84%E7%9F%AD%E6%9C%9F%E6%9C%89%E6%95%88%E5%B9%B6%E8%BF%9B%E8%A1%8C%E7%BB%AD%E7%AD%BE">保证令牌的短期有效，并进行续签</a></li>
 </ul>
-<h2 id="2-1-EnableAutoConfiguration-实现自动装配的核心注解"><a href="#2-1-EnableAutoConfiguration-实现自动装配的核心注解" class="headerlink" title="2.1@EnableAutoConfiguration:实现自动装配的核心注解"></a>2.1@EnableAutoConfiguration:实现自动装配的核心注解</h2><p>EnableAutoConfiguration 只是一个简单地注解，自动装配核心功能的实现实际是通过 AutoConfigurationImportSelector类。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Target</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token class-name">ElementType</span><span class="token punctuation">.</span><span class="token constant">TYPE</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@Retention</span><span class="token punctuation">(</span><span class="token class-name">RetentionPolicy</span><span class="token punctuation">.</span><span class="token constant">RUNTIME</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@Documented</span>
-<span class="token annotation punctuation">@Inherited</span>
-<span class="token annotation punctuation">@AutoConfigurationPackage</span> <span class="token comment">//作用：将main包下的所有组件注册到容器中</span>
-<span class="token annotation punctuation">@Import</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span><span class="token class-name">AutoConfigurationImportSelector</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token comment">//加载自动装配类 xxxAutoconfiguration</span>
-<span class="token keyword">public</span> <span class="token annotation punctuation">@interface</span> <span class="token class-name">EnableAutoConfiguration</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">String</span> <span class="token constant">ENABLED_OVERRIDE_PROPERTY</span> <span class="token operator">=</span> <span class="token string">"spring.boot.enableautoconfiguration"</span><span class="token punctuation">;</span>
-
-    <span class="token class-name">Class</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token operator">?</span><span class="token punctuation">></span></span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">exclude</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-
-    <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">excludeName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>我们现在重点分析下AutoConfigurationImportSelector 类到底做了什么？</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">AutoConfigurationImportSelector</span> <span class="token keyword">implements</span> <span class="token class-name">DeferredImportSelector</span><span class="token punctuation">,</span> <span class="token class-name">BeanClassLoaderAware</span><span class="token punctuation">,</span> <span class="token class-name">ResourceLoaderAware</span><span class="token punctuation">,</span> <span class="token class-name">BeanFactoryAware</span><span class="token punctuation">,</span> <span class="token class-name">EnvironmentAware</span><span class="token punctuation">,</span> <span class="token class-name">Ordered</span> <span class="token punctuation">&#123;</span>
-
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">DeferredImportSelector</span> <span class="token keyword">extends</span> <span class="token class-name">ImportSelector</span> <span class="token punctuation">&#123;</span>
-
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">ImportSelector</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">selectImports</span><span class="token punctuation">(</span><span class="token class-name">AnnotationMetadata</span> var1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>可以看出，AutoConfigurationImportSelector 类实现了 ImportSelector接口，也就实现了这个接口中的 selectImports方法，该方法主要用于获取所有符合条件的类的全限定类名，这些类需要被加载到 IoC 容器中。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token constant">NO_IMPORTS</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-
-<span class="token keyword">public</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">selectImports</span><span class="token punctuation">(</span><span class="token class-name">AnnotationMetadata</span> annotationMetadata<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">// &lt;1>.判断自动装配开关是否打开</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">isEnabled</span><span class="token punctuation">(</span>annotationMetadata<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">return</span> <span class="token constant">NO_IMPORTS</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-          <span class="token comment">//&lt;2>.获取所有需要装配的bean</span>
-            <span class="token class-name">AutoConfigurationMetadata</span> autoConfigurationMetadata <span class="token operator">=</span> <span class="token class-name">AutoConfigurationMetadataLoader</span><span class="token punctuation">.</span><span class="token function">loadMetadata</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>beanClassLoader<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">AutoConfigurationImportSelector<span class="token punctuation">.</span>AutoConfigurationEntry</span> autoConfigurationEntry <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getAutoConfigurationEntry</span><span class="token punctuation">(</span>autoConfigurationMetadata<span class="token punctuation">,</span> annotationMetadata<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> <span class="token class-name">StringUtils</span><span class="token punctuation">.</span><span class="token function">toStringArray</span><span class="token punctuation">(</span>autoConfigurationEntry<span class="token punctuation">.</span><span class="token function">getConfigurations</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这里我们需要重点关注一下getAutoConfigurationEntry()方法，这个方法主要负责加载自动配置类的。<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230403084719.png" alt="20230403084719"></p>
-<p>现在我们结合getAutoConfigurationEntry()的源码来详细分析一下：</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">final</span> <span class="token class-name">AutoConfigurationEntry</span> <span class="token constant">EMPTY_ENTRY</span> <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">AutoConfigurationEntry</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-
-<span class="token class-name">AutoConfigurationEntry</span> <span class="token function">getAutoConfigurationEntry</span><span class="token punctuation">(</span><span class="token class-name">AutoConfigurationMetadata</span> autoConfigurationMetadata<span class="token punctuation">,</span> <span class="token class-name">AnnotationMetadata</span> annotationMetadata<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token comment">//&lt;1>.</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">isEnabled</span><span class="token punctuation">(</span>annotationMetadata<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">return</span> <span class="token constant">EMPTY_ENTRY</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-            <span class="token comment">//&lt;2>.</span>
-            <span class="token class-name">AnnotationAttributes</span> attributes <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getAttributes</span><span class="token punctuation">(</span>annotationMetadata<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment">//&lt;3>.</span>
-            <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> configurations <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getCandidateConfigurations</span><span class="token punctuation">(</span>annotationMetadata<span class="token punctuation">,</span> attributes<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token comment">//&lt;4>.</span>
-            configurations <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">removeDuplicates</span><span class="token punctuation">(</span>configurations<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token class-name">Set</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">></span></span> exclusions <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">getExclusions</span><span class="token punctuation">(</span>annotationMetadata<span class="token punctuation">,</span> attributes<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">checkExcludedClasses</span><span class="token punctuation">(</span>configurations<span class="token punctuation">,</span> exclusions<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            configurations<span class="token punctuation">.</span><span class="token function">removeAll</span><span class="token punctuation">(</span>exclusions<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            configurations <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>configurations<span class="token punctuation">,</span> autoConfigurationMetadata<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">fireAutoConfigurationImportEvents</span><span class="token punctuation">(</span>configurations<span class="token punctuation">,</span> exclusions<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">AutoConfigurationImportSelector<span class="token punctuation">.</span>AutoConfigurationEntry</span><span class="token punctuation">(</span>configurations<span class="token punctuation">,</span> exclusions<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>第 1 步:<br>判断自动装配开关是否打开。默认spring.boot.enableautoconfiguration&#x3D;true，可在 application.properties 或 application.yml 中设置<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230403084903.png" alt="20230403084903"></p>
-<p>第 2 步 ：</p>
-<p>用于获取EnableAutoConfiguration注解中的 exclude 和 excludeName。<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230403084927.png" alt="20230403084927"></p>
-<p>第 3 步:</p>
-<p>获取需要自动装配的所有配置类，读取META-INF&#x2F;spring.factories</p>
-<pre class="line-numbers language-text" data-language="text"><code class="language-text">spring-boot/spring-boot-project/spring-boot-autoconfigure/src/main/resources/META-INF/spring.factories<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230403085022.png" alt="20230403085022"></p>
-<p>从下图可以看到这个文件的配置内容都被我们读取到了。XXXAutoConfiguration的作用就是按需加载组件。<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230403085048.png" alt="20230403085048"><br>不光是这个依赖下的META-INF&#x2F;spring.factories被读取到，所有 Spring Boot Starter 下的META-INF&#x2F;spring.factories都会被读取到。所以，你可以清楚滴看到， druid 数据库连接池的 Spring Boot Starter 就创建了META-INF&#x2F;spring.factories文件。<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230403090605.png" alt="20230403090605"></p>
-<p>第 4 步 ：<br>到这里可能面试官会问你:“spring.factories中这么多配置，每次启动都要全部加载么？”。很明显，这是不现实的。我们 debug 到后面你会发现，configurations 的值变小了。</p>
-<p>因为，这一步有经历了一遍筛选，@ConditionalOnXXX 中的所有条件都满足，该类才会生效。</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Configuration</span>
-<span class="token comment">// 检查相关的类：RabbitTemplate 和 Channel是否存在</span>
-<span class="token comment">// 存在才会加载</span>
-<span class="token annotation punctuation">@ConditionalOnClass</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> <span class="token class-name">RabbitTemplate</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token class-name">Channel</span><span class="token punctuation">.</span><span class="token keyword">class</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@EnableConfigurationProperties</span><span class="token punctuation">(</span><span class="token class-name">RabbitProperties</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
-<span class="token annotation punctuation">@Import</span><span class="token punctuation">(</span><span class="token class-name">RabbitAnnotationDrivenConfiguration</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">RabbitAutoConfiguration</span> <span class="token punctuation">&#123;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><a href="#jwt%E7%BB%AD%E7%AD%BE%E9%97%AE%E9%A2%98">JWT续签问题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- /TOC -->
+<h1 id="1-认证和授权区别"><a href="#1-认证和授权区别" class="headerlink" title="1.认证和授权区别"></a>1.认证和授权区别</h1><ul>
+<li>认证是确认系统中是否有这个用户</li>
+<li>授权是查看这个用户有没有权限</li>
+</ul>
+<h1 id="2-RBAC"><a href="#2-RBAC" class="headerlink" title="2.RBAC"></a>2.RBAC</h1><p>全称（Role - Base - Access - Control) </p>
+<p>也就是说是基于角色的权限访问控制，用户关联角色，角色关联权限。<br>简单的说就是，一个用户可以有多个角色，一个角色拥有若干权限，一般通过多表实现，下面就是一个5表实现的例子<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230419101641.png" alt="20230419101641"></p>
+<p><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230419101649.png" alt="20230419101649"></p>
+<h1 id="3-cookie"><a href="#3-cookie" class="headerlink" title="3. cookie"></a>3. cookie</h1><p>简单来说： Cookie 存放在客户端，一般用来保存用户信息。</p>
+<ol>
+<li>我们在 Cookie 中保存已经登录过的用户信息，下次访问网站的时候页面可以自动帮你登录的一些基本信息给填了。除此之外，Cookie 还能保存用户首选项，主题和其他设置信息。</li>
+<li>使用 Cookie 保存 SessionId 或者 Token ，向后端发送请求的时候带上 Cookie，这样后端就能取到 Session 或者 Token 了。这样就能记录用户当前的状态了，因为 HTTP 协议是无状态的。</li>
+<li>Cookie 还可以用来记录和分析用户行为。举个简单的例子你在网上购物的时候，因为 HTTP 协议是没有状态的，如果服务器想要获取你在某个页面的停留状态或者看了哪些商品，一种常用的实现方式就是将这些信息存放在 Cookie</li>
+</ol>
+<h1 id="4-Cookie-和-Session-有什么区别？"><a href="#4-Cookie-和-Session-有什么区别？" class="headerlink" title="4. Cookie 和 Session 有什么区别？"></a>4. Cookie 和 Session 有什么区别？</h1><ol>
+<li>首先二者的存储位置不一样，cookie存储在客户端，session存储在服务端。</li>
+<li>session主要是通过服务器记录用户的状态的，典型的场景是购物车，当添加商品到购物车的时候，服务器不知道是那个用户添加的，因为http是无状态的。服务器给特定的用户创建特定的session之后就可以识别并跟踪用户了</li>
+</ol>
+<h1 id="5-cookie-session-方案验证用户的身份"><a href="#5-cookie-session-方案验证用户的身份" class="headerlink" title="5. cookie + session 方案验证用户的身份"></a>5. cookie + session 方案验证用户的身份</h1><p><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230419102153.png" alt="20230419102153"></p>
+<ol>
+<li>用户向服务器发送用户名、密码、验证码用于登陆系统。</li>
+<li>服务器验证通过后，服务器为用户创建一个 Session，并将 Session 信息存储起来。</li>
+<li>服务器向用户返回一个 SessionID，写入用户的 Cookie。</li>
+<li>当用户保持登录状态时，Cookie 将与每个后续请求一起被发送出去。</li>
+<li>服务器可以将存储在 Cookie 上的 SessionID 与存储在内存中或者数据库中的 Session 信息进行比较，以验证用户的身份，返回给用户客户端响应信息的时候会附带用户当前的状态。</li>
+</ol>
+<p><strong>使用 Session 的时候需要注意下面几个点：</strong></p>
+<ol>
+<li>依赖 Session 的关键业务一定要确保客户端开启了 Cookie。</li>
+<li>注意 Session 的过期时间。</li>
+</ol>
+<h1 id="6-多服务器节点下-Session-Cookie-方案如何做？"><a href="#6-多服务器节点下-Session-Cookie-方案如何做？" class="headerlink" title="6.多服务器节点下 Session-Cookie 方案如何做？"></a>6.多服务器节点下 Session-Cookie 方案如何做？</h1><p>为什么多节点会出现问题？</p>
+<p>因为session可能路由到其并非第一次请求的服务器上，而其他服务器，并没有保存这个请求的sessionId,造成无法识别的问题。</p>
+<p>解决办法：</p>
+<ol>
+<li>通过hash保证每次都被ngix转发到相同的服务器上</li>
+<li>服务器端同步session，但是代价很大</li>
+<li>单独使用一个所有服务器都能访问的数据节点，来存放session信息。</li>
+</ol>
+<h1 id="7-没有cookie是否可以使用session？"><a href="#7-没有cookie是否可以使用session？" class="headerlink" title="7. 没有cookie是否可以使用session？"></a>7. 没有cookie是否可以使用session？</h1><p> 当然是可以的，可以将sessionID直接封装到请求的url里面。当然需要加密。</p>
+<h1 id="8-cookie-不可以防止csrf攻击，而token可以？"><a href="#8-cookie-不可以防止csrf攻击，而token可以？" class="headerlink" title="8. cookie 不可以防止csrf攻击，而token可以？"></a>8. cookie 不可以防止csrf攻击，而token可以？</h1><p>csrf攻击： 跨站请求伪造，就是通过盗取用户的cookie中的sissionId来进行发送一些消息。</p>
+<p>因为cookie会保存sessionId，服务端是用过这个sessionId来识别用户的，服务端只要拿到sessionID就认为是正确的用户登录。</p>
+<p>但是token不会，token存放在locaStorage中，然后我们在前端通过某些方式会发给每个到后端的请求上添加这个token，这样就不会出现csrf的问题，因为即使点击了非法请求发送了请求到服务端，请求不会携带token。</p>
+<h1 id="9-JWT"><a href="#9-JWT" class="headerlink" title="9. JWT"></a>9. JWT</h1><p>Jwt令牌是一种无状态认证的，用户的信息是放在jwt中进行传递，服务端不予要保存session，减轻了服务端的压力。</p>
+<h2 id="9-0-jwt的优势"><a href="#9-0-jwt的优势" class="headerlink" title="9.0 jwt的优势"></a>9.0 jwt的优势</h2><ul>
+<li><p>简洁(Compact): 可以通过URL，POST参数或者在HTTP header发送，因为数据量小，传输速度也很快</p>
+</li>
+<li><p>自包含(Self-contained)：负载中包含了所有用户所需要的信息，避免了多次查询数据库</p>
+</li>
+<li><p>因为Token是以JSON加密的形式保存在客户端的，所以JWT是跨语言的，原则上任何web形式都支持。</p>
+</li>
+<li><p>不需要在服务端保存会话信息，特别适用于分布式微服务</p>
+</li>
+<li><p>单点登录友好：使用 Session 进行身份认证的话，实现单点登录，需要我们把用户的 Session 信息保存在一台电脑上，并且还会遇到常见的 Cookie 跨域的问题。但是，使用 JWT 进行认证的话， JWT 被保存在客户端，不会存在这些问题。</p>
+</li>
+</ul>
+<h2 id="9-1-JWT的组成部分"><a href="#9-1-JWT的组成部分" class="headerlink" title="9.1 JWT的组成部分"></a>9.1 JWT的组成部分</h2><p><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230419104948.png" alt="20230419104948"></p>
+<p>三部分，头，负载，签名</p>
+<ul>
+<li>头：定义算法的生成签名的方法以及token的类型</li>
+<li>负载： 存放实际需要传递的数据（比如用户id，此处不要存放密码，容易被反向解密）</li>
+<li>签名： 防止篡改</li>
+</ul>
+<h2 id="9-2-基于JWT进行身份验证"><a href="#9-2-基于JWT进行身份验证" class="headerlink" title="9.2 基于JWT进行身份验证"></a>9.2 基于JWT进行身份验证</h2><p>在基于 JWT 进行身份验证的的应用程序中，服务器通过 Payload、Header 和 Secret(密钥)创建 JWT 并将 JWT 发送给客户端。客户端接收到 JWT 之后，会将其保存在 Cookie 或者 localStorage 里面，以后客户端发出的所有请求都会携带这个令牌。<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230419105546.png" alt="20230419105546"></p>
+<ol>
+<li><p>首先，前端通过Web表单将自己的用户名和密码发送到后端的接口。这一过程一般是一个HTTP POST请求。建议的方式是通过SSL加密的传输（https协议），从而避免敏感信息被嗅探。</p>
+</li>
+<li><p>后端核对用户名和密码成功后，将用户的id等其他信息作为JWT Payload（负载），将其与头部分别进行Base64编码拼接后签名，形成一个JWT(Token)。形成的JWT就是一个形同lll.zzz.xxx的字符串。 token head.payload.singurater</p>
+</li>
+<li><p>后端将JWT字符串作为登录成功的返回结果返回给前端。前端可以将返回的结果保存在localStorage或sessionStorage上，退出登录时前端删除保存的JWT即可。</p>
+</li>
+<li><p>前端在每次请求时将JWT放入HTTP Header中的Authorization位。(解决XSS和XSRF问题) HEADER</p>
+</li>
+<li><p>后端检查是否存在，如存在验证JWT的有效性。例如，检查签名是否正确；检查Token是否过期；检查Token的接收方是否是自己（可选）。</p>
+</li>
+<li><p>验证通过后后端使用JWT中包含的用户信息进行其他逻辑操作，返回相应结果。</p>
+</li>
+</ol>
+<h2 id="9-3-如何防止-JWT-被篡改？"><a href="#9-3-如何防止-JWT-被篡改？" class="headerlink" title="9.3 如何防止 JWT 被篡改？"></a>9.3 如何防止 JWT 被篡改？</h2><p>有了签名之后，即使 JWT 被泄露或者截获，黑客也没办法同时篡改 Signature 、Header 、Payload。这是为什么呢？因为服务端拿到 JWT 之后，会解析出其中包含的 Header、Payload 以及 Signature 。服务端会根据 Header、Payload、密钥再次生成一个 Signature。拿新生成的 Signature 和 JWT 中的 Signature 作对比，如果一样就说明 Header 和 Payload 没有被修改。</p>
+<h2 id="9-4-那为什么-JWT-不会存在csrf攻击问题？"><a href="#9-4-那为什么-JWT-不会存在csrf攻击问题？" class="headerlink" title="9.4 那为什么 JWT 不会存在csrf攻击问题？"></a>9.4 那为什么 JWT 不会存在csrf攻击问题？</h2><p>一般情况下我们使用 JWT 的话，在我们登录成功获得 JWT 之后，一般会选择存放在 localStorage 中。前端的每一个请求后续都会附带上这个 JWT，整个过程压根不会涉及到 Cookie。因此，即使你点击了非法链接发送了请求到服务端，这个非法请求也是不会携带 JWT 的，所以这个请求将是非法的。总结来说就一句话：使用 JWT 进行身份验证不需要依赖 Cookie ，因此可以避免 CSRF 攻击。不过，这样也会存在 XSS 攻击的风险。为了避免 XSS 攻击，你可以选择将 JWT 存储在标记为httpOnly 的 Cookie 中。但是，这样又导致了你必须自己提供 CSRF 保护，因此，实际项目中我们通常也不会这么做。常见的避免 XSS 攻击的方式是过滤掉请求中存在 XSS 攻击风险的可疑字符串。</p>
+<h2 id="9-5-token和jwt区别"><a href="#9-5-token和jwt区别" class="headerlink" title="9.5 token和jwt区别"></a>9.5 token和jwt区别</h2><p>由客户端发送的token到服务端需要进行检验，需要查询数据库获取用户信息。而jwt不需要，只要对jwt进行解密，然后验证签名就行。省去了查库的这一步。</p>
+<h2 id="9-6-JWT身份认证常见问题及解决办法"><a href="#9-6-JWT身份认证常见问题及解决办法" class="headerlink" title="9.6 JWT身份认证常见问题及解决办法"></a>9.6 JWT身份认证常见问题及解决办法</h2><h3 id="1-注销登录场景下JWT还有效"><a href="#1-注销登录场景下JWT还有效" class="headerlink" title="1. 注销登录场景下JWT还有效"></a>1. 注销登录场景下JWT还有效</h3><p>与之类似的场景：</p>
+<ul>
+<li>退出登录;</li>
+<li>修改密码;</li>
+<li>服务端修改了某个用户具有的权限或者角色；</li>
+<li>用户的帐户被封禁&#x2F;删除；</li>
+<li>用户被服务端强制注销；</li>
+<li>用户被踢下线</li>
+</ul>
+<p>四种解决方案： </p>
+<h4 id="1-将JWT存入内存数据库"><a href="#1-将JWT存入内存数据库" class="headerlink" title="1. 将JWT存入内存数据库"></a>1. 将JWT存入内存数据库</h4><p>原因：想让某个JWT失效就直接从redis中删除这个令牌值就可以了，但是这样会导致每次使用JWT都会从redis中先查询是否存在，违背了无状态的原则</p>
+<h4 id="2-黑名单机制"><a href="#2-黑名单机制" class="headerlink" title="2. 黑名单机制"></a>2. 黑名单机制</h4><p>用redis维护一个黑名单，想让谁失效就在黑明单中加入。</p>
+<h4 id="3-修改秘钥"><a href="#3-修改秘钥" class="headerlink" title="3. 修改秘钥"></a>3. 修改秘钥</h4><p>为每个用户都创建一个专属秘钥，如果我们想让某个jwt失效，就直接修改对应的秘钥，但是危害更大</p>
+<ul>
+<li>分布式： 需要每次都同步全部的秘钥，为此需要将秘钥存储在数据节点上，这样和session没区别了</li>
+<li>如果用户在两个浏览器打开账号，那么需要退出一个，这个用户体验不友好</li>
+</ul>
+<h4 id="4-保证令牌的短期有效，并进行续签"><a href="#4-保证令牌的短期有效，并进行续签" class="headerlink" title="4.保证令牌的短期有效，并进行续签"></a>4.保证令牌的短期有效，并进行续签</h4><p>但是需要用户经常登录。可以联想下token的续签。</p>
+<p>另外，对于修改密码后 JWT 还有效问题的解决还是比较容易的。说一种我觉得比较好的方式：使用用户的密码的哈希值对 JWT 进行签名。因此，如果密码更改，则任何先前的令牌将自动无法验证。</p>
+<h3 id="2-JWT续签问题"><a href="#2-JWT续签问题" class="headerlink" title="2. JWT续签问题"></a>2. JWT续签问题</h3><p>一般短期有效，然后不断的刷新，只要用户有活跃，就延长有效期</p>
+<ol>
+<li>类似于session认证做法：<br> 设置30分钟有效期，服务端每次校验，发现快过期了就发送新的jwt，<strong>客户端</strong>每次请求都检查新旧jwt，如果不一致，就更新本地jwt，这种做法的问题是仅仅在快过期的时候请求才会更新JWT，对客户端不是很友好。</li>
+<li>每次请求都返回新 JWT这种方案的的思路很简单，但是，开销会比较大，尤其是在服务端要存储维护 JWT 的情况下。</li>
+<li>JWT 有效期设置到半夜这种方案是一种折衷的方案，保证了大部分用户白天可以正常登录，适用于对安全性要求不高的系统。</li>
+<li>用户登录返回两个jwt。第一个是 accessJWT ，它的过期时间 JWT 本身的过期时间比如半个小时，另外一个是 refreshJWT 它的过期时间更长一点比如为 1 天。客户端登录后，将 accessJWT 和 refreshJWT 保存在本地，每次访问将 accessJWT 传给服务端。服务端校验 accessJWT 的有效性，如果过期的话，就将 refreshJWT 传给服务端。如果有效，服务端就生成新的 accessJWT 给客户端。否则，客户端就重新登录即可。<ul>
+<li>存在的问题：</li>
+<li>需要客户端来配合；用户注销的时候需要同时保证两个 JWT 都无效</li>
+<li>重新请求获取 JWT 的过程中会有短暂 JWT 不可用的情况（可以通过在客户端设置定时器，当 accessJWT 快过期的时候，提前去通过 refreshJWT 获取新的 accessJWT）;</li>
+<li>存在安全问题，只要拿到了未过期的 refreshJWT 就一直可以获取到 accessJWT。</li>
+</ul>
+</li>
+</ol>
 
                 
             </div>
@@ -588,7 +616,7 @@ springBoot自己定义了一套接口规范，在启动">
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2023/04/03/springboot-zi-dong-zhuang-pei-jian-jie/">http://example.com/2023/04/03/springboot-zi-dong-zhuang-pei-jian-jie/</a>
+                    <a href="http://example.com/2023/04/19/ren-zheng-shou-quan/">http://example.com/2023/04/19/ren-zheng-shou-quan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -626,16 +654,12 @@ springBoot自己定义了一套接口规范，在启动">
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/springboot/">
-                                    <span class="chip bg-color">springboot</span>
+                                <a href="/tags/%E5%AE%89%E5%85%A8/">
+                                    <span class="chip bg-color">安全</span>
                                 </a>
                             
-                                <a href="/tags/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">
-                                    <span class="chip bg-color">自动装配</span>
-                                </a>
-                            
-                                <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                                    <span class="chip bg-color">面试</span>
+                                <a href="/tags/%E8%AE%A4%E8%AF%81%E6%8E%88%E6%9D%83%E5%9F%BA%E7%A1%80/">
+                                    <span class="chip bg-color">认证授权基础</span>
                                 </a>
                             
                         </div>
@@ -718,13 +742,13 @@ springBoot自己定义了一套接口规范，在启动">
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
             <div class="card">
-                <a href="/2023/04/03/ji-suan-ji-wang-luo-chang-jian-mian-shi-ti/">
+                <a href="/2023/04/19/session-cookie-jwt-cookie-qu-bie/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="计算机网络常见面试题--基础">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="session cookie jwt cookie 区别">
                         
-                        <span class="card-title">计算机网络常见面试题--基础</span>
+                        <span class="card-title">session cookie jwt cookie 区别</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -735,14 +759,14 @@ springBoot自己定义了一套接口规范，在启动">
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-03
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-04-19
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" class="post-category">
-                                    计算机网络
+                            <a href="/categories/%E8%AE%A4%E8%AF%81%E6%8E%88%E6%9D%83/" class="post-category">
+                                    认证授权
                                 </a>
                             
                             
@@ -752,16 +776,8 @@ springBoot自己定义了一套接口规范，在启动">
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E9%9D%A2%E8%AF%95/">
-                        <span class="chip bg-color">面试</span>
-                    </a>
-                    
-                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                        <span class="chip bg-color">计算机网络</span>
-                    </a>
-                    
-                    <a href="/tags/%E8%AE%A1%E7%BD%91/">
-                        <span class="chip bg-color">计网</span>
+                    <a href="/tags/%E5%AE%89%E5%85%A8/">
+                        <span class="chip bg-color">安全</span>
                     </a>
                     
                 </div>
@@ -775,13 +791,13 @@ springBoot自己定义了一套接口规范，在启动">
                 Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/04/02/trie-qian-zhui-shu/">
+                <a href="/2023/04/18/rocketmq-bi-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Trie 前缀树（字典树）">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="RocketMQ笔记">
                         
-                        <span class="card-title">Trie 前缀树（字典树）</span>
+                        <span class="card-title">RocketMQ笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -792,14 +808,14 @@ springBoot自己定义了一套接口规范，在启动">
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-02
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-18
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98/" class="post-category">
-                                    力扣刷题
+                            <a href="/categories/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" class="post-category">
+                                    消息队列
                                 </a>
                             
                             
@@ -809,20 +825,12 @@ springBoot自己定义了一套接口规范，在启动">
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98/">
-                        <span class="chip bg-color">力扣刷题</span>
+                    <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+                        <span class="chip bg-color">消息队列基础知识</span>
                     </a>
                     
-                    <a href="/tags/Trie/">
-                        <span class="chip bg-color">Trie</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%89%8D%E7%BC%80%E6%A0%91/">
-                        <span class="chip bg-color">前缀树</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%AD%97%E5%85%B8%E6%A0%91/">
-                        <span class="chip bg-color">字典树</span>
+                    <a href="/tags/RocketMq/">
+                        <span class="chip bg-color">RocketMq</span>
                     </a>
                     
                 </div>

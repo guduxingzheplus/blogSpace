@@ -394,21 +394,21 @@
                     <div class="post-statis col l4 hide-on-med-and-down" data-aos="zoom-in-right">
                         
 <div class="statis">
-    <span class="count"><a href="/">9</a></span>
+    <span class="count"><a href="/">11</a></span>
     <span class="name">Posts</span>
 </div>
 
 
 
 <div class="statis">
-    <span class="count"><a href="/categories">5</a></span>
+    <span class="count"><a href="/categories">6</a></span>
     <span class="name">Categories</span>
 </div>
 
 
 
 <div class="statis">
-    <span class="count"><a href="/tags">16</a></span>
+    <span class="count"><a href="/tags">18</a></span>
     <span class="name">Tags</span>
 </div>
 
@@ -424,21 +424,21 @@
                                 <div class="post-statis hide-on-large-only" data-aos="zoom-in-right">
                                     
 <div class="statis">
-    <span class="count"><a href="/">9</a></span>
+    <span class="count"><a href="/">11</a></span>
     <span class="name">Posts</span>
 </div>
 
 
 
 <div class="statis">
-    <span class="count"><a href="/categories">5</a></span>
+    <span class="count"><a href="/categories">6</a></span>
     <span class="name">Categories</span>
 </div>
 
 
 
 <div class="statis">
-    <span class="count"><a href="/tags">16</a></span>
+    <span class="count"><a href="/tags">18</a></span>
     <span class="name">Tags</span>
 </div>
 
@@ -582,7 +582,7 @@
                 name: 'Number of posts',
                 type: 'line',
                 color: ['#6772e5'],
-                data: [0,0,0,0,0,0,0,0,0,0,0,2,7],
+                data: [0,0,0,0,0,0,0,0,0,0,0,2,9],
                 markPoint: {
                     symbolSize: 45,
                     color: ['#fa755a','#3ecf8e','#82d3f4'],
@@ -624,7 +624,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"spring面试","value":3},{"name":"力扣刷题","value":1},{"name":"springBoot原理","value":1},{"name":"计算机网络","value":2},{"name":"消息队列","value":1}],
+                data: [{"name":"spring面试","value":3},{"name":"力扣刷题","value":1},{"name":"springBoot原理","value":1},{"name":"消息队列","value":2},{"name":"计算机网络","value":1},{"name":"认证授权","value":2}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -648,7 +648,7 @@
         xAxis: [
             {
                 type: 'category',
-                data: ["面试","spring","力扣刷题","计算机网络","计网","事务","Trie","前缀树","字典树","springboot"]
+                data: ["面试","spring","力扣刷题","消息队列基础知识","安全","springboot","自动装配","Trie","前缀树","字典树"]
             }
         ],
         yAxis: [
@@ -661,7 +661,7 @@
                 type: 'bar',
                 color: ['#82d3f4'],
                 barWidth : 18,
-                data: [5,3,2,2,2,1,1,1,1,1],
+                data: [4,3,2,2,2,1,1,1,1,1],
                 markPoint: {
                     symbolSize: 45,
                     data: [{
@@ -831,8 +831,14 @@
         <div class="tag-chips center-align">
             
             
-            <a href="/tags/spring/">
-                <span class="chip center-align waves-effect waves-light chip-default">spring</span>
+            <a href="/tags/springboot/">
+                <span class="chip center-align waves-effect waves-light chip-default">springboot</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">
+                <span class="chip center-align waves-effect waves-light chip-default">自动装配</span>
             </a>
             
             
@@ -843,8 +849,8 @@
             
             
             
-            <a href="/tags/%E4%BA%8B%E5%8A%A1/">
-                <span class="chip center-align waves-effect waves-light chip-default">事务</span>
+            <a href="/tags/spring/">
+                <span class="chip center-align waves-effect waves-light chip-default">spring</span>
             </a>
             
             
@@ -873,32 +879,20 @@
             
             
             
-            <a href="/tags/springboot/">
-                <span class="chip center-align waves-effect waves-light chip-default">springboot</span>
+            <a href="/tags/dp/">
+                <span class="chip center-align waves-effect waves-light chip-default">dp</span>
             </a>
             
             
             
-            <a href="/tags/%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D/">
-                <span class="chip center-align waves-effect waves-light chip-default">自动装配</span>
+            <a href="/tags/%E4%BA%8B%E5%8A%A1/">
+                <span class="chip center-align waves-effect waves-light chip-default">事务</span>
             </a>
             
             
             
-            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                <span class="chip center-align waves-effect waves-light chip-default">计算机网络</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E8%AE%A1%E7%BD%91/">
-                <span class="chip center-align waves-effect waves-light chip-default">计网</span>
-            </a>
-            
-            
-            
-            <a href="/tags/TCP/">
-                <span class="chip center-align waves-effect waves-light chip-default">TCP</span>
+            <a href="/tags/%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/">
+                <span class="chip center-align waves-effect waves-light chip-default">循环依赖</span>
             </a>
             
             
@@ -915,14 +909,32 @@
             
             
             
-            <a href="/tags/%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/">
-                <span class="chip center-align waves-effect waves-light chip-default">循环依赖</span>
+            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                <span class="chip center-align waves-effect waves-light chip-default">计算机网络</span>
             </a>
             
             
             
-            <a href="/tags/dp/">
-                <span class="chip center-align waves-effect waves-light chip-default">dp</span>
+            <a href="/tags/%E8%AE%A1%E7%BD%91/">
+                <span class="chip center-align waves-effect waves-light chip-default">计网</span>
+            </a>
+            
+            
+            
+            <a href="/tags/RocketMq/">
+                <span class="chip center-align waves-effect waves-light chip-default">RocketMq</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E5%AE%89%E5%85%A8/">
+                <span class="chip center-align waves-effect waves-light chip-default">安全</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E8%AE%A4%E8%AF%81%E6%8E%88%E6%9D%83%E5%9F%BA%E7%A1%80/">
+                <span class="chip center-align waves-effect waves-light chip-default">认证授权基础</span>
             </a>
             
             
