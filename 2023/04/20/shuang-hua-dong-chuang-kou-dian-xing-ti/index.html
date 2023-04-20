@@ -4,14 +4,13 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="双滑动窗口典型题, 小林嘞">
-    <meta name="description" content="992. K 个不同整数的子数组
-最传统的想法就是使用基本的单滑动窗口来做，代码如下：
-import java.util.HashSet;
-import java.util.Set;
+    <meta name="keywords" content="滑动窗口典型题, 小林嘞">
+    <meta name="description" content="1.单滑窗模板滑窗条件：
 
-class Solution &amp;#123;
-    p">
+研究对象为单个元素，而不是子数组的元素之和
+约束条件是一个范围
+
+这个题就是典型的滑动窗口的题目，我们使用HashMap来进行滑动，对于示例4这样的我们发现，如果用双指针，则无法准确定位两个指针的位置（两个已有的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -23,7 +22,7 @@ class Solution &amp;#123;
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>双滑动窗口典型题 | 小林嘞</title>
+    <title>滑动窗口典型题 | 小林嘞</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -340,12 +339,12 @@ class Solution &amp;#123;
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">双滑动窗口典型题</h1>
+                    <h1 class="description center-align post-title">滑动窗口典型题</h1>
                 </div>
             </div>
         </div>
@@ -375,6 +374,14 @@ class Solution &amp;#123;
                         
                             <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
                                 <span class="chip bg-color">滑动窗口</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%8F%8C%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
+                                <span class="chip bg-color">双滑动窗口</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%BB%91%E7%AA%97%E6%A8%A1%E6%9D%BF/">
+                                <span class="chip bg-color">滑窗模板</span>
                             </a>
                         
                     </div>
@@ -412,14 +419,14 @@ class Solution &amp;#123;
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    420
+                    1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    1 Min
+                    4 Min
                 </div>
                 
 
@@ -442,7 +449,70 @@ class Solution &amp;#123;
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="992-K-个不同整数的子数组"><a href="#992-K-个不同整数的子数组" class="headerlink" title="992. K 个不同整数的子数组"></a>992. K 个不同整数的子数组</h1><p><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230420172551.png" alt="20230420172551"></p>
+                <h1 id="1-单滑窗模板"><a href="#1-单滑窗模板" class="headerlink" title="1.单滑窗模板"></a>1.单滑窗模板</h1><p>滑窗条件：</p>
+<ol>
+<li>研究对象为单个元素，而不是子数组的元素之和</li>
+<li>约束条件是一个范围</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230420214434.png" alt="20230420214434"><br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230420214522.png" alt="20230420214522"><br>这个题就是典型的滑动窗口的题目，我们使用HashMap来进行滑动，对于示例4这样的我们发现，如果用双指针，则无法准确定位两个指针的位置（两个已有的不同的数字的位置），为什么用hashMap不用其他数据结构呢？还是例4，我们发现对于12112这个序列，再往后滑动，会直接将开头位置设置为2，而不是1开头，这就需要我们记录每个元素的使用次数，如果全用完了就从hashMap中删除。对于12112序列，最后剩下的是2，就是这个道理。代码如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">totalFruit</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> fruits<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> left <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> right <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> fruits<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+        <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Integer</span><span class="token punctuation">,</span> <span class="token class-name">Integer</span><span class="token punctuation">></span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> re <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>right <span class="token operator">&lt;</span> n<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> temp <span class="token operator">=</span> fruits<span class="token punctuation">[</span>right<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>temp<span class="token punctuation">,</span> map<span class="token punctuation">.</span><span class="token function">getOrDefault</span><span class="token punctuation">(</span>temp<span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">while</span><span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                <span class="token keyword">int</span> lt <span class="token operator">=</span> fruits<span class="token punctuation">[</span>left<span class="token operator">++</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+                map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>lt<span class="token punctuation">,</span> map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>lt<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span>map<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>lt<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                    map<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>lt<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+            re <span class="token operator">=</span> <span class="token class-name">Math</span><span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>re<span class="token punctuation">,</span> right <span class="token operator">-</span> left<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> re<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="2-范围滑窗"><a href="#2-范围滑窗" class="headerlink" title="2. 范围滑窗"></a>2. 范围滑窗</h1><p><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230420214906.png" alt="20230420214906"></p>
+<p>在这个题目中，给出的最大值范围是[left,right]我们不能直接去限定滑窗内的最大值的范围为[left,right]，这样是非常困难的，我们不妨限定两部分，第一部分，找出最大值比left - 1小的数组的数量，第二部分，找到最大值比right小的部分，两者做差，就是最终的值。这个思想在下一题也使用到了。我们注意代码的</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">ans <span class="token operator">+=</span> temp<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这样可以求出全部的子数组的数量，为什么呢？</p>
+<p>举个例子：</p>
+<p>1,2,3,4能组成几个数组？</p>
+<p>答案： 1+2+3+4， 所以发现了规律没有？就是不断的加当前数字。我们在</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">temp2 <span class="token operator">&lt;</span> maxNum<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>这里将只要小于就加一，同时一旦发现不小于，不满足条件就清空重来。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">numSubarrayBoundedMax</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> left<span class="token punctuation">,</span> <span class="token keyword">int</span> right<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token function">nt</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> right<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token function">nt</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> left <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">nt</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span>nums<span class="token punctuation">,</span> <span class="token keyword">int</span> maxNum<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> ans <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> n <span class="token operator">=</span> nums<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> temp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token keyword">int</span> temp2 <span class="token operator">=</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span><span class="token punctuation">(</span>temp2 <span class="token operator">&lt;=</span> maxNum<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                temp<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+                temp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+            ans <span class="token operator">+=</span> temp<span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span> ans<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h1 id="3-范围滑窗变种"><a href="#3-范围滑窗变种" class="headerlink" title="3. 范围滑窗变种"></a>3. 范围滑窗变种</h1><ol start="992">
+<li>K 个不同整数的子数组<br><img src="https://raw.githubusercontent.com/guduxingzheplus/blogPic/main/imgs/20230420172551.png" alt="20230420172551"></li>
+</ol>
 <p>最传统的想法就是使用基本的单滑动窗口来做，代码如下：</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">HashSet</span></span><span class="token punctuation">;</span>
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Set</span></span><span class="token punctuation">;</span>
@@ -576,6 +646,14 @@ class Solution &amp;#123;
                                     <span class="chip bg-color">滑动窗口</span>
                                 </a>
                             
+                                <a href="/tags/%E5%8F%8C%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
+                                    <span class="chip bg-color">双滑动窗口</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%BB%91%E7%AA%97%E6%A8%A1%E6%9D%BF/">
+                                    <span class="chip bg-color">滑窗模板</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -661,9 +739,9 @@ class Solution &amp;#123;
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="双滑动窗口典型题">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="滑动窗口典型题">
                         
-                        <span class="card-title">双滑动窗口典型题</span>
+                        <span class="card-title">滑动窗口典型题</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -698,6 +776,14 @@ class Solution &amp;#123;
                     
                     <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
                         <span class="chip bg-color">滑动窗口</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%8F%8C%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
+                        <span class="chip bg-color">双滑动窗口</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%BB%91%E7%AA%97%E6%A8%A1%E6%9D%BF/">
+                        <span class="chip bg-color">滑窗模板</span>
                     </a>
                     
                 </div>
