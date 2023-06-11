@@ -4,6 +4,96 @@
   
     
     <entry>
+      <title>笔试中遇到的问题</title>
+      <link href="/2023/06/11/bi-shi-zhong-yu-dao-de-wen-ti/"/>
+      <url>/2023/06/11/bi-shi-zhong-yu-dao-de-wen-ti/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-数据库"><a href="#1-数据库" class="headerlink" title="1.数据库"></a>1.数据库</h1><h2 id="1-1-关系，元组，属性和域"><a href="#1-1-关系，元组，属性和域" class="headerlink" title="1.1 关系，元组，属性和域"></a>1.1 关系，元组，属性和域</h2><p>关系： 用来指代表</p><p>元组： 用来指代行</p><p>属性：  也叫作码，用来指代表中的列</p><p><strong>域</strong>： 对于关系的每个属性，都存在一个允许取值的集合，成为该属性的域。<br>也就是说，数据表中每行数据允许取的值。</p><h2 id="1-2-数据库范式"><a href="#1-2-数据库范式" class="headerlink" title="1.2 数据库范式"></a>1.2 数据库范式</h2><ul><li>1NF ：属性不可再分</li><li>2NF ：在1NF的基础上消除了非主属性对于码的部分函数依赖</li><li>3NF ： 在2NF的基础上，消除对非主属性对于码的传递性依赖</li></ul><p>简单解释：</p><ul><li>函数依赖: 若在一张表之中，在属性X的值确定的情况下，必定能确定Y。<br>则可以说Y函数依赖于X</li><li>部分函数依赖: 在函数依赖的基础上，X上升为一个集合，X的一个子集可以<br>可以确定对应的Y。比如：学号，身份证号）-&gt;（姓名），（学号）-&gt;（姓名），<br>（身份证号）-&gt;（姓名）</li><li>传递函数依赖: X确定Y，Y确定Z，X不包含Y，Y不确定X，（X并Y）∩Z&#x3D;空<br>则Z为传递函数依赖。传递函数以来的问题就是存在数据冗余。往往Y,Z都是同属于某一事物的<br>，举例:  R(学号 , 姓名, 系名，系主任)中，学号 → 系名，系名 → 系主任，所以存在非主属性系主任对于学号的传递函数依赖。</li></ul><p>1NF： 属性不能再被分割，也就是这个字段只能是一个值，不能再被分为其他<br>的字段。</p><p>2NF： 如果数据库中存在主键，则其余属性对于主键都是依赖的。</p><p>3NF： 消除传递函数依赖，基本上解决数据冗余过大，插入异常，修改异常，删除异常的问题。</p><h1 id="2-数据结构"><a href="#2-数据结构" class="headerlink" title="2.数据结构"></a>2.数据结构</h1><h2 id="2-1-十字链表"><a href="#2-1-十字链表" class="headerlink" title="2.1 十字链表"></a>2.1 十字链表</h2><p><img src="https://cdn.jsdelivr.net/gh/guduxingzheplus/blogPic@main/imgs/202306112030189.png"><br>十字链表一共有5个域，其结构为数组的每一行的非零元素结点构成一个带头结点的循环链表，每一列的非零元素结点也构成一个带头结点的循环链表，这种组织方法使同一非零元素结点既处在某一行的链表中，又处在某一列的链表中。<br>整体结构如下图所示：<br><img src="https://cdn.jsdelivr.net/gh/guduxingzheplus/blogPic@main/imgs/202306112031496.png"><br>我们注意到，以第一行第二个节点为例子，他一共有<strong>4</strong>个指针！，向下指的，以及下面的向上指的！</p><h2 id="2-2-B-树查找"><a href="#2-2-B-树查找" class="headerlink" title="2.2 B+树查找"></a>2.2 B+树查找</h2><p>B+树可以存储更多的结点元素，更加 ”矮胖“。这也是 B+树最大的优势坐在，极大地改善了 B-树的查找效率。对于同样多的记录，B+树的高度会更矮，并且<br>P<sub>next</sub>指针的出现可以帮助 B+树快速访问磁盘记录且效率非常高。总之，就是 B+树比 B-树更加好，B+树的磁盘 I &#x2F; O 会更少，相比于 B-树的中序遍历，B+树只需要像遍历单链表一样扫描一遍叶子结点。<br><img src="https://cdn.jsdelivr.net/gh/guduxingzheplus/blogPic@main/imgs/202306112038498.png"><br>查找操作如下：</p><p>第一点：B+树中的所有数据均保存在叶子结点，且根结点和内部结点均只是充当控制查找记录的媒介，并不代表数据本身，所有的内部结点元素都同时存在于子结点中，是子节点元素中是最大（或最小）元素。<br><img src="https://cdn.jsdelivr.net/gh/guduxingzheplus/blogPic@main/imgs/202306112038426.png"><br>比如 B+ 树中的结点 59 （结点 15、44、97、72 类似），是其子结点 [15、44、59] 中的最大元素，也是叶子结点 [51、59] 中的最大元素。所有的数据 [10、15、21、37、44、51、59、63、72、85、91、97] 均保存在叶子结点之中，而根结点 [59、97] 及内部结点 [15、44、59] 与 [72、97] 均不是数据本身，只是充当控制查找记录的媒介。</p><p>需要注意的是，根结点的最大元素 97 是整颗 B+树当中最大的元素，无论之后在叶子结点中插入或删除多少元素，始终要保证最大元素在根结点当中，这个讲插入和删除时还会看到。</p><p>第二点：每一个叶子结点都有指向下一个叶子结点的<br> P<sub>next</sub> 指针，便捷之处就在于之后我们将看到的区间查找。</p><p><img src="https://cdn.jsdelivr.net/gh/guduxingzheplus/blogPic@main/imgs/202306112039692.png"></p><p><strong>查询单个元素</strong><br>我们以查询 59 为例进行说明。</p><p>第一次磁盘 I&#x2F;O ：访问根结点 [59、97] ，发现 59 小于等于 [59、97] 中的 59 ，则访问根结点的第一个孩子结点。<br><img src="https://cdn.jsdelivr.net/gh/guduxingzheplus/blogPic@main/imgs/202306112040031.png"><br>第二次磁盘 I&#x2F;O : 访问结点 [15、44、59] ，发现 59 大于 44 且小于等于 59 ，则访问当前结点的第三个孩子结点 [51、59] .<br><img src="https://cdn.jsdelivr.net/gh/guduxingzheplus/blogPic@main/imgs/202306112040078.png"><br>第三次磁盘 I&#x2F;O ：访问叶子结点 [51、59] ，顺序遍历结点内部，找到要查找的元素 59 .<br><img src="https://cdn.jsdelivr.net/gh/guduxingzheplus/blogPic@main/imgs/202306112040407.png"><br>对于 B+树中单个元素的查找而言，每一个元素都有相同的磁盘 I&#x2F;O操作次数，即使查询的元素出现在根结点中，但那只是一个充当控制查找记录的媒介，并不是数据本身，数据真正存在于叶子结点当中，所以<br>B+树中查找任何一个元素都要从根结点一直走到叶子结点才可以。</p><p>B+树的非叶子结点均不存储 Data (即 <em>D</em><sub>i</sub><br> ，官方将其称为卫星数据) ，所以与 B-树相比，同样大小的磁盘页，B+树的非叶子结点可以存储更多的索引（关键字），这也就意味着在数据量相同的情况下，B+树的结构比 B-树更加 “矮胖”，查询时磁盘 I&#x2F;O 次数会更少。</p><h1 id="3-网络"><a href="#3-网络" class="headerlink" title="3.网络"></a>3.网络</h1><h2 id="3-1-Telnet"><a href="#3-1-Telnet" class="headerlink" title="3.1 Telnet"></a>3.1 Telnet</h2><p>应用层协议，属于TCP&#x2F;IP一族，是Internet远程登录的服务标准和主要方式。</p><h2 id="3-2-应用层协议主要有？"><a href="#3-2-应用层协议主要有？" class="headerlink" title="3.2 应用层协议主要有？"></a>3.2 应用层协议主要有？</h2><p>DNS,FTP,Telnet,HTTP,SMTP,POP3,TFTP</p><h2 id="3-3-传输层常见协议？"><a href="#3-3-传输层常见协议？" class="headerlink" title="3.3 传输层常见协议？"></a>3.3 传输层常见协议？</h2><p>TCP&#x2F;UDP</p><h2 id="3-4-网络层次架构"><a href="#3-4-网络层次架构" class="headerlink" title="3.4 网络层次架构"></a>3.4 网络层次架构</h2><p>应用层，传输层，网络层，网络接口层</p><h3 id="3-4-1-传输层与网络层的区别"><a href="#3-4-1-传输层与网络层的区别" class="headerlink" title="3.4.1 传输层与网络层的区别"></a>3.4.1 传输层与网络层的区别</h3><p>传输层是为了不同主机上运行的应用进程提供逻辑通信，而网络层协议为不同主机<br>之间提供逻辑通信。也就是说，传输层服务的更上层一点。</p><p>传输层提供<strong>端到端</strong>的通信服务层次，提供及时可靠的及非可靠的连接。<br>在端口之间可靠的传输数据。</p><p>网络层则是<strong>点到点</strong>源节点到目的节点。</p><h2 id="3-5-ARP"><a href="#3-5-ARP" class="headerlink" title="3.5 ARP"></a>3.5 ARP</h2><p>通过IP地址获取物理地址的协议。IP-&gt;MAC地址</p><h2 id="3-6-email发送接收"><a href="#3-6-email发送接收" class="headerlink" title="3.6 email发送接收"></a>3.6 email发送接收</h2><p>可以使用smtp和pop3协议。POP3是收邮件的协议,SMTP是发邮件的协议,IMAP是一种邮箱通信协议。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 笔试 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 银行笔试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>实验思路(验证方面)</title>
+      <link href="/2023/05/05/shi-yan-si-lu-yan-zheng-fang-mian/"/>
+      <url>/2023/05/05/shi-yan-si-lu-yan-zheng-fang-mian/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>循环依赖 源码层次</title>
+      <link href="/2023/04/22/xun-huan-yi-lai-yuan-ma-ceng-ci/"/>
+      <url>/2023/04/22/xun-huan-yi-lai-yuan-ma-ceng-ci/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      <categories>
+          
+          <category> spring面试 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> spring 源码 </tag>
+            
+            <tag> 循环引用 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>spring 源码阅读 - 细小知识点</title>
+      <link href="/2023/04/22/spring-yuan-ma-yue-du-xi-xiao-zhi-shi-dian/"/>
+      <url>/2023/04/22/spring-yuan-ma-yue-du-xi-xiao-zhi-shi-dian/</url>
+      
+        <content type="html"><![CDATA[<ol><li>在方法内部定义的局部变量不会存在线程安全问题</li><li>推荐将成员变量拷贝到方法内部再操作，这样更安全</li><li>后置处理器是在bean实例化之后就执行，而smartInitializingSingleton是在所有的bean实例化完毕后才执行。</li><li>非懒加载单例bean： spring中默认的bean的形式。非懒加载就是说在spring容器的初始化之后就将其<strong>实例化</strong>加载到spring应用程序的上下文中。而懒加载则是在需要的时候才实例化。<br>举例：<br>非懒加载<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>userService<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.example.UserService<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li></ol><p>懒加载</p><pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>userService<span class="token punctuation">"</span></span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>com.example.UserService<span class="token punctuation">"</span></span> <span class="token attr-name">lazy-init</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>这里lazy-init设置为 true，代表懒加载，懒加载可以提高程序的性能和效率。</p><ol start="5"><li><p>单例bean都被缓存到一个map里</p></li><li><p>容器初始化的时候只会去初始化factorybean本身，而从<strong>factoryBean去拿单例对象则都是懒加载的</strong>，只有在使用的时候才会调用其内部的getObject方法来获取bean对象。</p></li><li><p>spring 工厂bean以 &amp; 开头</p></li><li><p>多例bean不会被缓存，单例会被缓存，多例会被重复创建。</p></li><li><p>spring实例化：对象创建的过程， 比如使用构造方法new对象，为对象在内存中分配空间。</p><p> 初始化：为对象中的属性赋值的过程。</p></li><li><p>三级缓存：</p></li></ol><ul><li>一级缓存：singletonObjects ，所有的创建好的完整的bean都放在这。</li><li>二级缓存： earlySingletonObjects 早期的单例bean，未完全初始化的bean</li><li>三级缓存： singletonFactories 存对象工厂</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> spring面试 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> spring 源码 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>滑动窗口典型题</title>
       <link href="/2023/04/20/shuang-hua-dong-chuang-kou-dian-xing-ti/"/>
       <url>/2023/04/20/shuang-hua-dong-chuang-kou-dian-xing-ti/</url>
