@@ -388,21 +388,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>Update Date:&nbsp;&nbsp;
-                    2023-07-28
+                    2023-07-31
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    2.5k
+                    3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    8 Min
+                    11 Min
                 </div>
                 
 
@@ -503,6 +503,118 @@ window<span class="token punctuation">.</span><span class="token function">addEv
 <p>用户与各个子系统建立的会话称为局部会话，局部会话建立之后，用户访问子系统受保护资源将不再通过sso认证中心</p>
 <p>全局会话与局部会话有如下约束关系：</p>
 <p>局部会话存在，全局会话一定存在<br>全局会话存在，局部会话不一定存在<br>全局会话销毁，局部会话必须销毁</p>
+<h1 id="3-抢课"><a href="#3-抢课" class="headerlink" title="3. 抢课"></a>3. 抢课</h1><p><img src="https://cdn.jsdelivr.net/gh/guduxingzheplus/blogPic@main/imgs/202307311726791.png"><br><img src="https://cdn.jsdelivr.net/gh/guduxingzheplus/blogPic@main/imgs/202307311727304.png"><br><img src="https://cdn.jsdelivr.net/gh/guduxingzheplus/blogPic@main/imgs/202307311728380.png"><br><img src="https://cdn.jsdelivr.net/gh/guduxingzheplus/blogPic@main/imgs/202307311728666.png"><br><img src="https://cdn.jsdelivr.net/gh/guduxingzheplus/blogPic@main/imgs/202307311729938.png"><br><img src="https://cdn.jsdelivr.net/gh/guduxingzheplus/blogPic@main/imgs/202307311729044.png"></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">@RestController
+@Slf4j
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SpikeCommodityServiceImpl</span> <span class="token keyword">extends</span> <span class="token class-name">BaseApiService</span><span class="token operator">&lt;</span>JSONObject<span class="token operator">></span> <span class="token keyword">implements</span> <span class="token class-name">SpikeCommodityService</span> <span class="token punctuation">&#123;</span>
+	@Autowired
+	<span class="token keyword">private</span> SeckillMapper seckillMapper<span class="token punctuation">;</span>
+	@Autowired
+	<span class="token keyword">private</span> GenerateToken generateToken<span class="token punctuation">;</span>
+	@Autowired
+	<span class="token keyword">private</span> SpikeCommodityProducer spikeCommodityProducer<span class="token punctuation">;</span>
+ 
+	@Override
+	@Transactional
+    @<span class="token function">HystrixCommand</span><span class="token punctuation">(</span>fallbackMethod <span class="token operator">=</span> <span class="token string">"spikeFallback"</span><span class="token punctuation">)</span>
+	<span class="token keyword">public</span> BaseResponse<span class="token operator">&lt;</span>JSONObject<span class="token operator">></span> <span class="token function">spike</span><span class="token punctuation">(</span><span class="token parameter">String phone<span class="token punctuation">,</span> Long seckillId</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token comment">// 1.参数验证</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>StringUtils<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>phone<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">return</span> <span class="token function">setResultError</span><span class="token punctuation">(</span><span class="token string">"手机号码不能为空!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>seckillId <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">return</span> <span class="token function">setResultError</span><span class="token punctuation">(</span><span class="token string">"商品库存id不能为空!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		<span class="token comment">// 2.从redis从获取对应的秒杀token</span>
+		String seckillToken <span class="token operator">=</span> generateToken<span class="token punctuation">.</span><span class="token function">getListKeyToken</span><span class="token punctuation">(</span>seckillId <span class="token operator">+</span> <span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>StringUtils<span class="token punctuation">.</span><span class="token function">isEmpty</span><span class="token punctuation">(</span>seckillToken<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			log<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">">>>seckillId:&#123;&#125;, 亲，该秒杀已经售空，请下次再来!"</span><span class="token punctuation">,</span> seckillId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token keyword">return</span> <span class="token function">setResultError</span><span class="token punctuation">(</span><span class="token string">"亲，该秒杀已经售空，请下次再来!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+ 
+		<span class="token comment">// 3.获取到秒杀token之后，异步放入mq中实现修改商品的库存</span>
+		<span class="token function">sendSeckillMsg</span><span class="token punctuation">(</span>seckillId<span class="token punctuation">,</span> phone<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> <span class="token function">setResultSuccess</span><span class="token punctuation">(</span><span class="token string">"正在排队中......."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+ 
+	<span class="token comment">/**
+	 * 获取到秒杀token之后，异步放入mq中实现修改商品的库存
+	 */</span>
+	@Async
+	<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">sendSeckillMsg</span><span class="token punctuation">(</span><span class="token parameter">Long seckillId<span class="token punctuation">,</span> String phone</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		JSONObject jsonObject <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">JSONObject</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		jsonObject<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"seckillId"</span><span class="token punctuation">,</span> seckillId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		jsonObject<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"phone"</span><span class="token punctuation">,</span> phone<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		spikeCommodityProducer<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>jsonObject<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+ 
+	<span class="token comment">/**
+	 * 使用多线程异步生产令牌
+	 * 
+	 * @param seckillId
+	 * @param tokenQuantity
+	 * @return
+	 */</span>
+ 
+	<span class="token comment">// 采用redis数据库类型为 list类型 key为 商品库存id list 多个秒杀token</span>
+	@Override
+	<span class="token keyword">public</span> BaseResponse<span class="token operator">&lt;</span>JSONObject<span class="token operator">></span> <span class="token function">addSpikeToken</span><span class="token punctuation">(</span><span class="token parameter">Long seckillId<span class="token punctuation">,</span> Long tokenQuantity</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token comment">// 1.验证参数</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>seckillId <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">return</span> <span class="token function">setResultError</span><span class="token punctuation">(</span><span class="token string">"商品库存id不能为空!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>tokenQuantity <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">return</span> <span class="token function">setResultError</span><span class="token punctuation">(</span><span class="token string">"token数量不能为空!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		SeckillEntity seckillEntity <span class="token operator">=</span> seckillMapper<span class="token punctuation">.</span><span class="token function">findBySeckillId</span><span class="token punctuation">(</span>seckillId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">if</span> <span class="token punctuation">(</span>seckillEntity <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">return</span> <span class="token function">setResultError</span><span class="token punctuation">(</span><span class="token string">"商品信息不存在!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">&#125;</span>
+		<span class="token comment">// 2.使用多线程异步生产令牌</span>
+		<span class="token function">createSeckillToken</span><span class="token punctuation">(</span>seckillId<span class="token punctuation">,</span> tokenQuantity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token keyword">return</span> <span class="token function">setResultSuccess</span><span class="token punctuation">(</span><span class="token string">"令牌正在生成中....."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+ 
+	@Async
+	<span class="token keyword">private</span> <span class="token keyword">void</span> <span class="token function">createSeckillToken</span><span class="token punctuation">(</span><span class="token parameter">Long seckillId<span class="token punctuation">,</span> Long tokenQuantity</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		generateToken<span class="token punctuation">.</span><span class="token function">createListToken</span><span class="token punctuation">(</span><span class="token string">"seckill_"</span><span class="token punctuation">,</span> seckillId <span class="token operator">+</span> <span class="token string">""</span><span class="token punctuation">,</span> tokenQuantity<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">&#125;</span>
+ 
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p><img src="https://cdn.jsdelivr.net/gh/guduxingzheplus/blogPic@main/imgs/202307311731394.png"></p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">SeckillMapper</span> <span class="token punctuation">&#123;</span>
+ 
+	<span class="token comment">/**
+	 * 使用乐观锁修改库存信息 and inventory>0方式
+	 * @param seckillId
+	 * @return
+	 */</span>
+	@<span class="token function">Update</span><span class="token punctuation">(</span><span class="token string">"update meite_seckill set inventory=inventory-1 where  seckill_id='10001' and inventory>0"</span><span class="token punctuation">)</span>
+	int <span class="token function">optimisticLockSeckill</span><span class="token punctuation">(</span>Long seckillId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+	<span class="token comment">/**
+	 * 基于版本号形式实现乐观锁
+	 * @param seckillId
+	 * @return
+	 */</span>
+	@<span class="token function">Update</span><span class="token punctuation">(</span><span class="token string">"update meite_seckill set inventory=inventory-1 ,version=version+1 where  seckill_id=#&#123;seckillId&#125; and version=#&#123;version&#125; and inventory>0;"</span><span class="token punctuation">)</span>
+	int <span class="token function">optimisticVersionSeckill</span><span class="token punctuation">(</span>@<span class="token function">Param</span><span class="token punctuation">(</span><span class="token string">"seckillId"</span><span class="token punctuation">)</span> Long seckillId<span class="token punctuation">,</span> @<span class="token function">Param</span><span class="token punctuation">(</span><span class="token string">"version"</span><span class="token punctuation">)</span> Long version<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+	@<span class="token function">Update</span><span class="token punctuation">(</span><span class="token string">"update meite_seckill set inventory=inventory-1 where  seckill_id='10001';"</span><span class="token punctuation">)</span>
+	int <span class="token function">inventoryDeduction</span><span class="token punctuation">(</span>Long seckillId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+	@<span class="token function">Select</span><span class="token punctuation">(</span><span class="token string">"SELECT seckill_id AS seckillId,name as name,inventory as inventory,start_time as startTime,end_time as endTime,create_time as createTime,version as version from meite_seckill where seckill_id=#&#123;seckillId&#125;"</span><span class="token punctuation">)</span>
+	SeckillEntity <span class="token function">findBySeckillId</span><span class="token punctuation">(</span>Long seckillId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+
+
+
 
                 
             </div>
